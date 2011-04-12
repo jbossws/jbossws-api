@@ -64,28 +64,59 @@ public abstract class ServiceLoader
     * as the name of the implementation class.
     * 
     * 4. Finally, a default implementation class name is used.
+    * 
+    * @param propertyName   The property name for the service to resolve
+    * @param defaultFactory Default factory class name to be used when not able to resolve anything
+    * @param cl             The classLoader to be used for loading resolved service
+    * @return               A new instance of the required service
     */
-   public static Object loadService(String propertyName, String defaultFactory)
+   public static Object loadService(String propertyName, String defaultFactory, ClassLoader cl)
    {
-      Object factory = loadFromServices(propertyName, null);
+      Object factory = loadFromServices(propertyName, null, cl);
       if (factory == null)
       {
-         factory = loadFromPropertiesFile(propertyName, null);
+         factory = loadFromPropertiesFile(propertyName, null, cl);
       }
       if (factory == null)
       {
-         factory = loadFromSystemProperty(propertyName, defaultFactory);
+         factory = loadFromSystemProperty(propertyName, defaultFactory, cl);
       }
       return factory;
    }
    
+   /**
+    * This method uses the algorithm below using the JAXWS Provider as an example.
+    * 
+    * 1. If a resource with the name of META-INF/services/javax.xml.ws.spi.Provider exists, then
+    * its first line, if present, is used as the UTF-8 encoded name of the implementation class.
+    * 
+    * 2. If the ${java.home}/lib/jaxws.properties file exists and it is readable by the 
+    * java.util.Properties.load(InputStream) method and it contains an entry whose key is 
+    * javax.xml.ws.spi.Provider, then the value of that entry is used as the name of the implementation class.
+    * 
+    * 3. If a system property with the name javax.xml.ws.spi.Provider is defined, then its value is used
+    * as the name of the implementation class.
+    * 
+    * 4. Finally, a default implementation class name is used.
+    * 
+    * This is equivalent to calling {@link loadService(String propertyName, String defaultFactory, ClassLoader cl)}
+    * passing in the Thread.currentThread().getContextClassLoader().
+    * 
+    * @param propertyName   The property name for the service to resolve
+    * @param defaultFactory Default factory class name to be used when not able to resolve anything
+    * @return               A new instance of the required service
+    */
+   public static Object loadService(String propertyName, String defaultFactory)
+   {
+      return loadService(propertyName, defaultFactory, SecurityActions.getContextClassLoader());
+   }
+   
    /** Use the Services API (as detailed in the JAR specification), if available, to determine the classname.
     */
-   public static Object loadFromServices(String propertyName, String defaultFactory)
+   private static Object loadFromServices(String propertyName, String defaultFactory, ClassLoader loader)
    {
       Object factory = null;
       String factoryName = null;
-      ClassLoader loader = SecurityActions.getContextClassLoader();
       
       // Use the Services API (as detailed in the JAR specification), if available, to determine the classname.
       String filename = "META-INF/services/" + propertyName;
@@ -107,7 +138,7 @@ public abstract class ServiceLoader
       // Use the default factory implementation class.
       if (factory == null && defaultFactory != null)
       {
-         factory = loadDefault(defaultFactory);
+         factory = loadDefault(defaultFactory, loader);
       }
 
       return factory;
@@ -142,10 +173,9 @@ public abstract class ServiceLoader
    
    /** Use the system property
     */
-   public static Object loadFromSystemProperty(String propertyName, String defaultFactory)
+   private static Object loadFromSystemProperty(String propertyName, String defaultFactory, ClassLoader loader)
    {
       Object factory = null;
-      ClassLoader loader = SecurityActions.getContextClassLoader();
 
       PrivilegedAction action = new PropertyAccessAction(propertyName);
       String factoryName = (String)AccessController.doPrivileged(action);
@@ -166,7 +196,7 @@ public abstract class ServiceLoader
       // Use the default factory implementation class.
       if (factory == null && defaultFactory != null)
       {
-         factory = loadDefault(defaultFactory);
+         factory = loadDefault(defaultFactory, loader);
       }
 
       return factory;
@@ -177,11 +207,10 @@ public abstract class ServiceLoader
     * This configuration file is in standard java.util.Properties format and contains the 
     * fully qualified name of the implementation class with the key being the system property defined above.
     */
-   public static Object loadFromPropertiesFile(String propertyName, String defaultFactory)
+   private static Object loadFromPropertiesFile(String propertyName, String defaultFactory, ClassLoader loader)
    {
       Object factory = null;
       String factoryName = null;
-      ClassLoader loader = SecurityActions.getContextClassLoader();
 
       // Use the properties file "lib/jaxm.properties" in the JRE directory.
       // This configuration file is in standard java.util.Properties format and contains the fully qualified name of the implementation class with the key being the system property defined above.
@@ -211,16 +240,15 @@ public abstract class ServiceLoader
       // Use the default factory implementation class.
       if (factory == null && defaultFactory != null)
       {
-         factory = loadDefault(defaultFactory);
+         factory = loadDefault(defaultFactory, loader);
       }
 
       return factory;
    }
 
-   private static Object loadDefault(String defaultFactory)
+   private static Object loadDefault(String defaultFactory, ClassLoader loader)
    {
       Object factory = null;
-      ClassLoader loader = SecurityActions.getContextClassLoader();
 
       // Use the default factory implementation class.
       if (defaultFactory != null)
