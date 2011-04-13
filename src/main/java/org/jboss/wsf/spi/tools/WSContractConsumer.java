@@ -52,7 +52,21 @@ public abstract class WSContractConsumer
     */
    public static WSContractConsumer newInstance()
    {
-      return newInstance(SecurityActions.getContextClassLoader());
+       // TODO: use SPI class loader facade, not reflection!
+       ClassLoader loader;
+       try {
+          Class<?> moduleClass = Class.forName("org.jboss.modules.Module");
+          Class<?> moduleIdentifierClass = Class.forName("org.jboss.modules.ModuleIdentifier");
+          Class<?> moduleLoaderClass = Class.forName("org.jboss.modules.ModuleLoader");
+          Object moduleLoader = moduleClass.getMethod("getBootModuleLoader").invoke(null);
+          Object moduleIdentifier = moduleIdentifierClass.getMethod("create", String.class).invoke(null, "org.jboss.as.webservices.server.integration");
+          Object module = moduleLoaderClass.getMethod("loadModule", moduleIdentifierClass).invoke(moduleLoader, moduleIdentifier);
+          loader = (ClassLoader)moduleClass.getMethod("getClassLoader").invoke(module);
+       } catch (Exception e) {
+          //ignore, JBoss Modules might not be available at all
+          loader = Thread.currentThread().getContextClassLoader();
+       }
+      return newInstance(loader);
    }
 
    /**
