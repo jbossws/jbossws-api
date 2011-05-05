@@ -19,29 +19,25 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.jboss.wsf.common.addressing;
+package org.jboss.ws.api.addressing;
+
+import java.util.List;
+
+import org.w3c.dom.Element;
 
 /**
- * MAPConstants is a wrapper which works with class MAP
+ * MAPEndpoint is a wrapper which works with class MAP.
  * 
  * @author Andrew Dinn (adinn@redhat.com)
  * @author alessio.soldano@jboss.com
  * 
  */
-public interface MAPConstants
+public interface MAPEndpoint
 {
-   public String getAnonymousURI();
+   public String getAddress();
+
+   public void addReferenceParameter(Element element);
    
-   public String getNoneURI();
-
-   public String getClientAddressingProperties();
-
-   public String getClientAddressingPropertiesInbound();
-
-   public String getClientAddressingPropertiesOutbound();
-
-   public String getServerAddressingPropertiesInbound();
-
-   public String getServerAddressingPropertiesOutbound();
+   public List<Object> getReferenceParameters();
 
 }

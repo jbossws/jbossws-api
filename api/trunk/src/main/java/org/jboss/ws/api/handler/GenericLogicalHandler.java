@@ -19,37 +19,17 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.jboss.wsf.common.handler;
+package org.jboss.ws.api.handler;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.xml.namespace.QName;
+import javax.xml.ws.handler.LogicalHandler;
 import javax.xml.ws.handler.LogicalMessageContext;
-import javax.xml.ws.handler.soap.SOAPHandler;
 
 /**
- * A generic jaxws soap handler
+ * A generic jaxws logical handler
  *
  * @author Thomas.Diesler@jboss.org
  * @since 13-Aug-2006
  */
-public abstract class GenericSOAPHandler<C extends LogicalMessageContext> extends GenericHandler implements SOAPHandler
+public class GenericLogicalHandler<C extends LogicalMessageContext> extends GenericHandler implements LogicalHandler
 {
-   // The header blocks that can be processed by this Handler instance
-   private Set<QName> headers = new HashSet<QName>();
-   
-   /** Gets the header blocks that can be processed by this Handler instance.
-    */
-   public Set<QName> getHeaders()
-   {
-      return headers;
-   }
-
-   /** Sets the header blocks that can be processed by this Handler instance.
-    */
-   public void setHeaders(Set<QName> headers)
-   {
-      this.headers = headers;
-   }
 }
