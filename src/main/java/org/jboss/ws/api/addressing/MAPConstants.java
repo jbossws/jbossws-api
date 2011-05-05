@@ -19,17 +19,29 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.jboss.wsf.common.handler;
-
-import javax.xml.ws.handler.LogicalHandler;
-import javax.xml.ws.handler.LogicalMessageContext;
+package org.jboss.ws.api.addressing;
 
 /**
- * A generic jaxws logical handler
- *
- * @author Thomas.Diesler@jboss.org
- * @since 13-Aug-2006
+ * MAPConstants is a wrapper which works with class MAP
+ * 
+ * @author Andrew Dinn (adinn@redhat.com)
+ * @author alessio.soldano@jboss.com
+ * 
  */
-public class GenericLogicalHandler<C extends LogicalMessageContext> extends GenericHandler implements LogicalHandler
+public interface MAPConstants
 {
+   public String getAnonymousURI();
+   
+   public String getNoneURI();
+
+   public String getClientAddressingProperties();
+
+   public String getClientAddressingPropertiesInbound();
+
+   public String getClientAddressingPropertiesOutbound();
+
+   public String getServerAddressingPropertiesInbound();
+
+   public String getServerAddressingPropertiesOutbound();
+
 }

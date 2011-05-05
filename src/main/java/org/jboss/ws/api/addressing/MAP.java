@@ -19,25 +19,60 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.jboss.wsf.common.addressing;
+package org.jboss.ws.api.addressing;
 
 import java.util.List;
+import java.util.Map;
 
 import org.w3c.dom.Element;
 
 /**
- * MAPEndpoint is a wrapper which works with class MAP.
+ * Message Addressing Properties is a wrapper for the stack-specific JSR-261 addressing properties
+ * classes implemented by JBossWS Native and CXF. It is used to localize dependence upon the WS
+ * stack.
  * 
  * @author Andrew Dinn (adinn@redhat.com)
  * @author alessio.soldano@jboss.com
  * 
  */
-public interface MAPEndpoint
+public interface MAP
 {
-   public String getAddress();
+   public String getTo();
 
-   public void addReferenceParameter(Element element);
+   public MAPEndpoint getFrom();
+
+   public String getMessageID();
+
+   public String getAction();
+
+   public MAPEndpoint getFaultTo();
+
+   public MAPEndpoint getReplyTo();
+
+   public MAPRelatesTo getRelatesTo();
+
+   public void setTo(String address);
+
+   public void setFrom(MAPEndpoint epref);
+
+   public void setMessageID(String messageID);
+
+   public void setAction(String action);
+
+   public void setReplyTo(MAPEndpoint epref);
+
+   public void setFaultTo(MAPEndpoint epref);
+
+   public void setRelatesTo(MAPRelatesTo relatesTo);
+
+   public void addReferenceParameter(Element refParam);
    
    public List<Object> getReferenceParameters();
+
+   public void initializeAsDestination(MAPEndpoint epref);
+
+   public void installOutboundMapOnServerSide(Map<String, Object> requestContext, MAP map);
+   
+   public void installOutboundMapOnClientSide(Map<String, Object> requestContext, MAP map);
 
 }
