@@ -19,7 +19,7 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.jboss.wsf.spi.tools;
+package org.jboss.ws.api.tools;
 
 import java.io.File;
 import java.io.PrintStream;
@@ -51,7 +51,7 @@ import org.jboss.wsf.spi.util.ServiceLoader;
 public abstract class WSContractProvider
 {
    private static String DEFAULT_PROVIDER = "org.jboss.ws.tools.jaxws.impl.JBossWSProviderFactoryImpl";
-   public static final String PROVIDER_PROPERTY = "org.jboss.wsf.spi.tools.ProviderFactoryImpl";
+   public static final String PROVIDER_PROPERTY = "org.jboss.ws.api.tools.ProviderFactory";
 
    protected WSContractProvider()
    {
