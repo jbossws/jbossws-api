@@ -27,7 +27,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
-import org.jboss.wsf.spi.util.ServiceLoader;
+import org.jboss.ws.api.util.ServiceLoader;
 
 /**
  * WSContractConsumer is responsible for generating JAX-WS client and server

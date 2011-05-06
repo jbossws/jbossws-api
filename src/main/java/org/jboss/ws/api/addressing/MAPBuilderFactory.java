@@ -25,7 +25,7 @@ import java.security.AccessController;
 import java.security.PrivilegedAction;
 
 import org.jboss.logging.Logger;
-import org.jboss.wsf.spi.util.ServiceLoader;
+import org.jboss.ws.api.util.ServiceLoader;
 
 /**
  * Factory for MAPBuilder; to be used to get an instance of the proper MAPBuilder

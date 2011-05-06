@@ -24,7 +24,7 @@ package org.jboss.ws.api.tools;
 import java.io.File;
 import java.io.PrintStream;
 
-import org.jboss.wsf.spi.util.ServiceLoader;
+import org.jboss.ws.api.util.ServiceLoader;
 
 /**
  * WSContractProvider is responsible for generating the required portable
