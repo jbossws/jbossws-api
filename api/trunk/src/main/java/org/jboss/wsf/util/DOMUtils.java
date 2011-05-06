@@ -61,14 +61,9 @@ import org.xml.sax.SAXException;
  * @author Thomas.Diesler@jboss.org
  * 
  */
-public final class DOMUtils
+public abstract class DOMUtils
 {
    private static Logger log = Logger.getLogger(DOMUtils.class);
-   
-   private DOMUtils()
-   {
-      // forbidden instantiation
-   }
 
    /** Get the qname of the given node.
     */
