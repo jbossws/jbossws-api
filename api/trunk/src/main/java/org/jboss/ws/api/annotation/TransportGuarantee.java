@@ -33,7 +33,7 @@ package org.jboss.ws.api.annotation;
  * the transmission. In most cases, the presence of the INTEGRAL or
  * CONFIDENTIAL flag will indicate that the use of SSL is required.
  * 
- * @author ropalka@redhat.com
+ * @author <a href="mailto:ropalka@redhat.com">Richard Opalka</a>
  */
 public final class TransportGuarantee
 {
@@ -62,10 +62,10 @@ public final class TransportGuarantee
    }
    
    /**
-    * Returns string representing correct transport guarantee value.
+    * Returns string representing correct {@link org.jboss.ws.api.annotation.TransportGuarantee} value.
     * @param s string to convert.
     * @return correct transport guarantee value
-    * @throws IllegalArgumentException if <b>s</b> is <b>null</b> or it contains unknown value.
+    * @throws IllegalArgumentException if <b>s</b> is <b>null</b> or contains unknown value.
     */
    public static String valueOf(final String s)
    {

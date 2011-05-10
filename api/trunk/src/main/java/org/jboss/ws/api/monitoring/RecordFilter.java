@@ -26,7 +26,7 @@ import java.io.Serializable;
 /**
  * A record filter
  * 
- * @author alessio.soldano@jboss.com
+ * @author <a href="mailto:alessio.soldano@jboss.com">Alessio Soldano</a>
  * @since 8-Dec-2007
  */
 public interface RecordFilter extends Cloneable, Serializable

@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source.
- * Copyright 2006, Red Hat Middleware LLC, and individual contributors
+ * Copyright 2007, Red Hat Middleware LLC, and individual contributors
  * as indicated by the @author tags. See the copyright.txt file in the
  * distribution for a full listing of individual contributors.
  *
@@ -26,9 +26,10 @@ import java.util.Stack;
 import org.jboss.logging.Logger;
 
 /**
- * Associates the record group ID with the current thread. 
+ * Associates the record group ID with the current thread. This is implemented internally
+ * through a static ThreadLocal member. 
  * 
- * @author alessio.soldano@jboss.com
+ * @author <a href="mailto:alessio.soldano@jboss.com">Alessio Soldano</a>
  * @since 8-Dec-2007
  */
 public class RecordGroupAssociation
@@ -38,7 +39,11 @@ public class RecordGroupAssociation
    // provide logging
    private static Logger log = Logger.getLogger(RecordGroupAssociation.class);
   
-
+   /**
+    * Associates the specified groupID to the current thread
+    * 
+    * @param groupID the groupID to associate to the current thread
+    */
    public static void pushGroupID(String groupID)
    {
       if(log.isTraceEnabled()) log.trace("pushGroupID: " + groupID + " (Thread " +Thread.currentThread().getName()+ ")");
@@ -51,6 +56,11 @@ public class RecordGroupAssociation
       stack.push(groupID);
    }
 
+   /**
+    * Returns the groupID currently associated to the current thread
+    * 
+    * @return the current thread groupID
+    */
    public static String peekGroupID()
    {
       String groupID = null;
@@ -63,6 +73,11 @@ public class RecordGroupAssociation
       return groupID;
    }
 
+   /**
+    * Returns the groupID for the current thread and removes the association.
+    * 
+    * @return thre current thread groupID
+    */
    public static String popGroupID()
    {
       String groupID = null;

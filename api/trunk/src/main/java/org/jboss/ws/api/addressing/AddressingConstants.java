@@ -24,8 +24,7 @@ package org.jboss.ws.api.addressing;
 import javax.xml.namespace.QName;
 
 /**
- * TODO: see javax.xml.ws.addressing - merge it properly
- * Addressing constants.
+ * WS-Addressing constants
  *
  * @author <a href="mailto:ropalka@redhat.com">Richard Opalka</a>
  */
@@ -40,7 +39,7 @@ public final class AddressingConstants
    }
 
    /**
-    * <a href="http://www.w3.org/2005/08/addressing">WSA</a> constants.
+    * <a href="http://www.w3.org/2005/08/addressing">WS-Addressing</a> constants.
     */
    public static final class Core
    {
@@ -199,7 +198,7 @@ public final class AddressingConstants
    }
 
    /**
-    * <a href="http://www.w3.org/2007/05/addressing/metadata">WSAM</a> constants.
+    * <a href="http://www.w3.org/2007/05/addressing/metadata">WS-Addressing Metadata</a> constants.
     */
    public static final class Metadata
    {

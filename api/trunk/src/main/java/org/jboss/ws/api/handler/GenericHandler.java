@@ -25,9 +25,9 @@ import javax.xml.ws.handler.Handler;
 import javax.xml.ws.handler.MessageContext;
 
 /**
- * A generic jaxws handler
+ * A generic JAX-WS handler
  *
- * @author Thomas.Diesler@jboss.org
+ * @author <a href="mailto:Thomas.Diesler@jboss.org">Thomas Diesler</a>
  * @since 13-Aug-2006
  */
 public abstract class GenericHandler implements Handler

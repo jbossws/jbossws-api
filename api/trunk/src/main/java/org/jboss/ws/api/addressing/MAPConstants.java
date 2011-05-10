@@ -22,10 +22,10 @@
 package org.jboss.ws.api.addressing;
 
 /**
- * MAPConstants is a wrapper which works with class MAP
+ * MAPConstants is a wrapper which works with class {@link org.jboss.ws.api.addressing.MAP}
  * 
- * @author Andrew Dinn (adinn@redhat.com)
- * @author alessio.soldano@jboss.com
+ * @author <a href="adinn@redhat.com">Andrew Dinn</a>
+ * @author <a href="alessio.soldano@jboss.com">Alessio Soldano</a>
  * 
  */
 public interface MAPConstants

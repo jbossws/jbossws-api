@@ -31,8 +31,8 @@ import org.w3c.dom.Element;
  * classes implemented by JBossWS Native and CXF. It is used to localize dependence upon the WS
  * stack.
  * 
- * @author Andrew Dinn (adinn@redhat.com)
- * @author alessio.soldano@jboss.com
+ * @author <a href="mailto:adinn@redhat.com">Andrew Dinn</a>
+ * @author <a href="mailto:alessio.soldano@jboss.com">Alessio Soldano</a>
  * 
  */
 public interface MAP

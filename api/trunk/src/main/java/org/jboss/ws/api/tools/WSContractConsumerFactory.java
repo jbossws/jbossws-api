@@ -24,17 +24,17 @@ package org.jboss.ws.api.tools;
 import org.jboss.ws.api.tools.WSContractConsumer;
 
 /**
- * Creates WSContractConsumer implementations.
+ * Creates {@link WSContractConsumer} implementations.
  * 
  * @author <a href="mailto:jason.greene@jboss.com">Jason T. Greene</a>
  */
 public interface WSContractConsumerFactory
 {
    /**
-    * Create a new WSContractConsumer. There are no restrictions on how this
+    * Create a new {@link WSContractConsumer}. There are no restrictions on how this
     * should be performed. 
     * 
-    * @return a new WSContractConsumer
+    * @return a new {@link WSContractConsumer}
     */
    public WSContractConsumer createConsumer();
 }

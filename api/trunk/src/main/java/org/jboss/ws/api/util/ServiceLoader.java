@@ -36,10 +36,23 @@ import java.util.WeakHashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Load a service class using this ordered lookup procedure
+ * Load a service class of a given name using this ordered lookup procedure:
+ * <ol>
+ * <li>If a resource file with the given name is found in META-INF/services/..., then
+ * its first line, if present, is used as the UTF-8 encoded name of the implementation class.</li>
+ * 
+ * <li>If the ${java.home}/lib/jaxws.properties file exists and it is readable by the 
+ * java.util.Properties.load(InputStream) method and it contains an entry whose key is 
+ * the given name, then the value of that entry is used as the name of the implementation class.</li>
+ * 
+ * <li>If a system property with the given name is defined, then its value is used
+ * as the name of the implementation class.</li>
+ * 
+ * <li>Finally, a default implementation class name is used.</li>
+ * </ol>
  *
- * @author Thomas.Diesler@jboss.com
- * @author alessio.soldano@jboss.com
+ * @author <a href="mailto:Thomas.Diesler@jboss.com">Thomas Diesler</a>
+ * @author <a href="mailto:alessio.soldano@jboss.com">Alessio Soldano</a>
  * @since 14-Dec-2006
  */
 public final class ServiceLoader
@@ -60,7 +73,7 @@ public final class ServiceLoader
 
    /**
     * This method uses the algorithm below using the JAXWS Provider as an example.
-    * 
+    * <pre>
     * 1. If a resource with the name of META-INF/services/javax.xml.ws.spi.Provider exists, then
     * its first line, if present, is used as the UTF-8 encoded name of the implementation class.
     * 
@@ -72,6 +85,7 @@ public final class ServiceLoader
     * as the name of the implementation class.
     * 
     * 4. Finally, a default implementation class name is used.
+    * </pre>
     * 
     * @param propertyName   The property name for the service to resolve
     * @param defaultFactory Default factory class name to be used when not able to resolve anything
@@ -94,7 +108,7 @@ public final class ServiceLoader
    
    /**
     * This method uses the algorithm below using the JAXWS Provider as an example.
-    * 
+    * <pre>
     * 1. If a resource with the name of META-INF/services/javax.xml.ws.spi.Provider exists, then
     * its first line, if present, is used as the UTF-8 encoded name of the implementation class.
     * 
@@ -106,8 +120,9 @@ public final class ServiceLoader
     * as the name of the implementation class.
     * 
     * 4. Finally, a default implementation class name is used.
+    * </pre>
     * 
-    * This is equivalent to calling {@link loadService(String propertyName, String defaultFactory, ClassLoader cl)}
+    * This is equivalent to calling {@link #loadService(String propertyName, String defaultFactory, ClassLoader cl)}
     * passing in the Thread.currentThread().getContextClassLoader().
     * 
     * @param propertyName   The property name for the service to resolve

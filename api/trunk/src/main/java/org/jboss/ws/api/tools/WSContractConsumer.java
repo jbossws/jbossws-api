@@ -44,11 +44,11 @@ public abstract class WSContractConsumer
    public static final String PROVIDER_PROPERTY = "org.jboss.ws.api.tools.ConsumerFactory";
 
    /**
-    * Obtain a new instance of a WSContractConsumer. This will use the current
-    * thread's context class loader to locate the WSContractConsumerFactory
+    * Obtain a new instance of a {@link WSContractConsumer}. This will use the current
+    * thread's context class loader to locate the {@link WSContractConsumerFactory}
     * implementation.
     *
-    * @return a new WSContractConsumer
+    * @return a new {@link WSContractConsumer} instance
     */
    public static WSContractConsumer newInstance()
    {
@@ -56,11 +56,11 @@ public abstract class WSContractConsumer
    }
 
    /**
-    * Obtain a new instance of a WSContractConsumer. The specified ClassLoader will be used to
-    * locate the WebServiceImporterProvide implementation
+    * Obtain a new instance of a {@link WSContractConsumer}. The specified ClassLoader will be used to
+    * locate the {@link WSContractConsumerFactory} implementation
     *
     * @param loader the ClassLoader to use
-    * @return a new WSContractConsumer
+    * @return a new {@link WSContractConsumer} instance
     */
    public static WSContractConsumer newInstance(ClassLoader loader)
    {
