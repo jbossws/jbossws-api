@@ -57,8 +57,8 @@ import org.xml.sax.SAXException;
 /**
  * Basic DOM2 utilities
  *
- * @author alessio.soldano@jboss.com
- * @author Thomas.Diesler@jboss.org
+ * @author <a href="mailto:alessio.soldano@jboss.com">Alessio Soldano</a>
+ * @author <a href="mailto:Thomas.Diesler@jboss.org">Thomas Diesler</a>
  * 
  */
 public abstract class DOMUtils

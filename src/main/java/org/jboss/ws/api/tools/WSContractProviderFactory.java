@@ -24,20 +24,20 @@ package org.jboss.ws.api.tools;
 import org.jboss.ws.api.tools.WSContractProvider;
 
 /**
- * Creates WSContractProvider implementations.
+ * Creates {@link WSContractProvider} implementations.
  * 
  * @author <a href="mailto:jason.greene@jboss.com">Jason T. Greene</a>
  */
 public interface WSContractProviderFactory
 {
    /**
-    * Create a new WSContractProvider. There are no restrictions on how this
+    * Create a new {@link WSContractProvider}. There are no restrictions on how this
     * should be performed. The passed ClassLoader is the one used in
     * {@link WSContractProvider#newInstance(ClassLoader)}. This loader
-    * should be made available to the generated WSContractProvider.
+    * should be made available to the generated {@link WSContractProvider}.
     * 
     * @param loader the ClassLoader for type discovery
-    * @return a new WSContractProvider
+    * @return a new {@link WSContractProvider}
     */
    public WSContractProvider createProvider(ClassLoader loader);
 }

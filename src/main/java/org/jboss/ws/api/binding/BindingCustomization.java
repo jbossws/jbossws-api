@@ -30,8 +30,8 @@ import java.util.HashMap;
  * <p>
  * Supported properties need to be documented in subclasses.
  *
- * @author Heiko.Braun@jboss.com
- *         Created: Jun 28, 2007
+ * @author <a href="mailto:Heiko.Braun@jboss.com">Heiko Braun</a>
+ * @since Jun 28, 2007
  */
 public abstract class BindingCustomization extends HashMap
 {

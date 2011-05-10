@@ -24,37 +24,58 @@ package org.jboss.ws.api.addressing;
 import java.util.Map;
 
 import javax.xml.namespace.QName;
-import javax.xml.ws.handler.MessageContext;
 
 /**
- * MAPBuilder is a helper used to create objects used with class MAP.
+ * MAPBuilder is a helper used to create objects used with class {@link org.jboss.ws.api.addressing.MAP}.
  * 
- * @author Andrew Dinn (adinn@redhat.com)
- * @author alessio.soldano@jboss.com
+ * @author <a href="mailto:adinn@redhat.com">Andrew Dinn</a>
+ * @author <a href="mailto:alessio.soldano@jboss.com">Alessio Soldano</a>
  * 
  */
 public interface MAPBuilder
 {
+   /**
+    * Creates a new {@link org.jboss.ws.api.addressing.MAP} instance
+    * 
+    * @return a {@link org.jboss.ws.api.addressing.MAP} instance
+    */
    public MAP newMap();
 
    /**
-    * retrieve the inbound server message address properties attached to a message context
+    * Retrieves the inbound server message address properties attached to a message context
+    * 
     * @param ctx the server message context
-    * @return
+    * @return the inbound server Message Addressing Properties instance
     */
    public MAP inboundMap(Map<String, Object> ctx);
 
    /**
-    * retrieve the outbound client message address properties attached to a message request map
+    * Retrieves the outbound client message address properties attached to a message request map
+    * 
     * @param ctx the client request properties map
-    * @return
+    * @return the outbound server Message Addressing Properties instance
     */
    public MAP outboundMap(Map<String, Object> ctx);
 
+   /**
+    * Creates a new {@link org.jboss.ws.api.addressing.MAPConstants} instance
+    * 
+    * @return a {@link org.jboss.ws.api.addressing.MAPConstants} instance
+    */
    public MAPConstants newConstants();
 
+   /**
+    * Creates a new {@link org.jboss.ws.api.addressing.MAPEndpoint} instance
+    * 
+    * @return a {@link org.jboss.ws.api.addressing.MAPEndpoint} instance
+    */
    public MAPEndpoint newEndpoint(String address);
 
+   /**
+    * Creates a new {@link org.jboss.ws.api.addressing.MAPRelatesTo} instance
+    * 
+    * @return a {@link org.jboss.ws.api.addressing.MAPRelatesTo} instance
+    */
    public MAPRelatesTo newRelatesTo(String id, QName type);
 
 }

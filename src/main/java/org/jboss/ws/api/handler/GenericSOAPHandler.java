@@ -29,7 +29,7 @@ import javax.xml.ws.handler.LogicalMessageContext;
 import javax.xml.ws.handler.soap.SOAPHandler;
 
 /**
- * A generic jaxws soap handler
+ * A generic JAX-WS soap handler
  *
  * @author Thomas.Diesler@jboss.org
  * @since 13-Aug-2006
@@ -39,14 +39,20 @@ public abstract class GenericSOAPHandler<C extends LogicalMessageContext> extend
    // The header blocks that can be processed by this Handler instance
    private Set<QName> headers = new HashSet<QName>();
    
-   /** Gets the header blocks that can be processed by this Handler instance.
+   /**
+    * Gets the header blocks that can be processed by this Handler instance.
+    * 
+    * @return a set of headers
     */
    public Set<QName> getHeaders()
    {
       return headers;
    }
 
-   /** Sets the header blocks that can be processed by this Handler instance.
+   /**
+    * Sets the header blocks that can be processed by this Handler instance.
+    * 
+    * @param headers the headers to be set
     */
    public void setHeaders(Set<QName> headers)
    {

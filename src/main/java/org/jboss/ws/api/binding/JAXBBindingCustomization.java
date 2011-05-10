@@ -26,7 +26,7 @@ import org.jboss.ws.api.binding.BindingCustomization;
 /**
  * JAXB customizations.
  *
- * @author alessio.soldano@jboss.com
+ * @author <a href="mailto:alessio.soldano@jboss.com">Alessio Soldano</a>
  * @since 05-Oct-2009
  */
 public class JAXBBindingCustomization extends BindingCustomization

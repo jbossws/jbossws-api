@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source.
- * Copyright 2006, Red Hat Middleware LLC, and individual contributors
+ * Copyright 2007, Red Hat Middleware LLC, and individual contributors
  * as indicated by the @author tags. See the copyright.txt file in the
  * distribution for a full listing of individual contributors.
  *
@@ -29,30 +29,47 @@ import java.util.Map;
 import javax.xml.namespace.QName;
 
 /**
+ * An interface defining recordable data
  * 
- * @author alessio.soldano@jboss.com
+ * @author <a href="mailto:alessio.soldano@jboss.com">Alessio Soldano</a>
  * @since 8-Dec-2007
  */
 public interface Record extends Serializable
 {
+   /**
+    * {@link org.jboss.ws.api.monitoring.Record}'s message type; can be either inboud or outbound
+    * 
+    * @author <a href="mailto:alessio.soldano@jboss.com">Alessio Soldano</a>
+    *
+    */
    public enum MessageType {INBOUND, OUTBOUND};
    
    /**
     * Gets the group ID corresponding to the current message exchange flow
     * 
-    * @return
+    * @return the groupID of the record
     */
    public String getGroupID();
    
+   /**
+    * Sets the groupID
+    * 
+    * @param groupID
+    */
    public void setGroupID(String groupID);
    
    /**
     * Gets the date of this record
     * 
-    * @return
+    * @return the date of the record
     */
    public Date getDate();
    
+   /**
+    * Sets the date of the record
+    * 
+    * @param date
+    */
    public void setDate(Date date);
    
    /**
@@ -62,6 +79,11 @@ public interface Record extends Serializable
     */
    public String getSourceHost();
    
+   /**
+    * Sets the source host
+    * 
+    * @param host
+    */
    public void setSourceHost(String host);
    
    /**
@@ -71,6 +93,11 @@ public interface Record extends Serializable
     */
    public String getDestinationHost();
    
+   /**
+    * Sets the destination host
+    * 
+    * @param host
+    */
    public void setDestinationHost(String host);
    
    /**
@@ -80,16 +107,26 @@ public interface Record extends Serializable
     */
    public MessageType getMessageType();
    
+   /**
+    * Sets the message type
+    * 
+    * @param type
+    */
    public void setMessageType(MessageType type);
    
    
    /**
     * Gets the SOAP message envelope
     * 
-    * @return
+    * @return the SOAP message envelope
     */
    public String getEnvelope();
    
+   /**
+    * Sets the SOAP message envelope
+    * 
+    * @param envelope
+    */
    public void setEnvelope(String envelope);
    
    /**
@@ -99,8 +136,19 @@ public interface Record extends Serializable
     */
    public Map<String, List<String>> getHeaders();
    
+   /**
+    * Adds a HTTP header to the record
+    * 
+    * @param key
+    * @param value
+    */
    public void addHeaders(String key, List<String> value);
-   
+
+   /**
+    * Sets the HTTP headers of the record
+    * 
+    * @param headers
+    */
    public void setHeaders(Map<String, List<String>> headers);
    
    /**
@@ -110,5 +158,10 @@ public interface Record extends Serializable
     */
    public QName getOperation();
    
+   /**
+    * Sets the record's operation
+    * 
+    * @param operation
+    */
    public void setOperation(QName operation);
 }

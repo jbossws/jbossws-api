@@ -25,9 +25,9 @@ import javax.xml.ws.handler.LogicalHandler;
 import javax.xml.ws.handler.LogicalMessageContext;
 
 /**
- * A generic jaxws logical handler
+ * A generic JAX-WS logical handler
  *
- * @author Thomas.Diesler@jboss.org
+ * @author <a href="mailto:Thomas.Diesler@jboss.org">Thomas Diesler</a>
  * @since 13-Aug-2006
  */
 public class GenericLogicalHandler<C extends LogicalMessageContext> extends GenericHandler implements LogicalHandler

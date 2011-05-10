@@ -27,24 +27,23 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Defines an endpoint configuration. 
+ * Defines an endpoint configuration.
  * This annotation is valid on an endpoint implementation bean or a SEI.
  * 
+ * @author <a href="mailto:alessio.soldano@jboss.com">Alessio Soldano</a>
  */
 @Retention(value = RetentionPolicy.RUNTIME)
 @Target(value = { ElementType.TYPE })
 public @interface EndpointConfig {
 
    /**
-    * The optional config-name element gives the configuration name that must be present in
-    * the configuration given by element config-file.
-    *
-    * Default: Standard Endpoint
+    * The configName gives the configuration name that must be present in the configuration given by configFile.
+    * If configName is not specified, the standard endpoint configuration is used.
     */
    String configName() default "";
 
    /**
-    * The optional config-file element is a URL or resource name for the configuration.
+    * The configFile element is a URL or resource name for the configuration.
     * The default value references the current AS configuration.
     *
     */

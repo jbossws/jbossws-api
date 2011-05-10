@@ -29,7 +29,7 @@ import java.lang.annotation.Target;
 /**
  * Provides web context specific meta data to EJB based web service endpoints.
  *
- * @author thomas.diesler@jboss.org
+ * @author <a href="mailto:thomas.diesler@jboss.org">Thomas Diesler</a>
  * @since 26-Apr-2005
  */
 @Retention(value = RetentionPolicy.RUNTIME)

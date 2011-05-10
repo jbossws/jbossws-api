@@ -59,11 +59,11 @@ public abstract class WSContractProvider
    }
 
    /**
-    * Obtain a new instance of a WSContractProvider. This will use the current
-    * thread's context class loader to locate the WSContractProviderFactory
+    * Obtain a new instance of a {@link WSContractProvider}. This will use the current
+    * thread's context class loader to locate the {@link WSContractProviderFactory}
     * implementation.
     * 
-    * @return a new WSContractProvider
+    * @return a new {@link WSContractProvider}
     */
    public static WSContractProvider newInstance()
    {
@@ -71,11 +71,11 @@ public abstract class WSContractProvider
    }
 
    /**
-    * Obtain a new instance of a WSContractProvider. The specified ClassLoader will be used to
-    * locate the WSContractProviderFactory implementation
+    * Obtain a new instance of a {@link WSContractProvider}. The specified ClassLoader will be used to
+    * locate the {@link WSContractProviderFactory} implementation
     * 
     * @param loader the ClassLoader to use
-    * @return a new WSContractProvider
+    * @return a new {@link WSContractProvider}
     */
    public static WSContractProvider newInstance(ClassLoader loader)
    {

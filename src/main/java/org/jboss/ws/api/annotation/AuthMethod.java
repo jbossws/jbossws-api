@@ -28,7 +28,7 @@ import org.jboss.logging.Logger;
  * As a prerequisite to gaining access to any web service which are protected by an 
  * authorization constraint, a user must have authenticated using the configured mechanism.
  * 
- * @author ropalka@redhat.com
+ * @author <a href="ropalka@redhat.com">Richard Opalka</a>
  */
 public final class AuthMethod
 {
@@ -52,10 +52,10 @@ public final class AuthMethod
    }
 
    /**
-    * Returns string representing correct auth method value.
+    * Returns string representing correct {@link org.jboss.ws.api.annotation.AuthMethod} value.
     * @param s string to convert.
     * @return correct auth method value
-    * @throws IllegalArgumentException if <b>s</b> is <b>null</b> or it contains unknown value.
+    * @throws IllegalArgumentException if <b>s</b> is <b>null</b> or contains unknown value.
     */
    public static String valueOf(final String s)
    {

@@ -28,10 +28,10 @@ import org.jboss.logging.Logger;
 import org.jboss.ws.api.util.ServiceLoader;
 
 /**
- * Factory for MAPBuilder; to be used to get an instance of the proper MAPBuilder
- * implementation which depends on the jbossws stack in use.
+ * Factory for {@link org.jboss.ws.api.addressing.MAPBuilder}; to be used to get an instance of the proper MAPBuilder
+ * implementation which depends on the JBossWS stack in use.
  * 
- * @author alessio.soldano@jboss.com
+ * @author <a href="mailto:alessio.soldano@jboss.com">Alessio Soldano</a>
  * @since 25-May-2009
  *
  */
@@ -43,12 +43,12 @@ public abstract class MAPBuilderFactory
    private static final String JBOSSWS_SPI_MODULE = "org.jboss.ws.spi";
    
    /**
-    * Get the proper MAPBuilderFactory instance according to stack in use;
+    * Get the proper {@link org.jboss.ws.api.addressing.MAPBuilderFactory} instance according to stack in use;
     * this uses the ws server integration modular classloader if available
     * (alternatively the current thread context classloader is used) for
     * looking up the factory name. 
     * 
-    * @return
+    * @return a {@link org.jboss.ws.api.addressing.MAPBuilderFactory} instance
     */
    public static MAPBuilderFactory getInstance()
    {
@@ -56,17 +56,22 @@ public abstract class MAPBuilderFactory
    }
    
    /**
-    * The same as getInstance() except the provided ClassLoader instance
+    * The same as {@link #getInstance()} except the provided ClassLoader instance
     * is used to lookup the factory name.
     * 
-    * @param loader
-    * @return
+    * @param loader the classloader instance to use
+    * @return a {@link org.jboss.ws.api.addressing.MAPBuilderFactory} instance
     */
    public static MAPBuilderFactory getInstance(ClassLoader loader)
    {
       return (MAPBuilderFactory)ServiceLoader.loadService(MAPBuilderFactory.class.getName(), null, loader);
    }
    
+   /**
+    * Get an instance of {@link org.jboss.ws.api.addressing.MAPBuilder}
+    * 
+    * @return a {@link org.jboss.ws.api.addressing.MAPBuilder} instance
+    */
    public abstract MAPBuilder getBuilderInstance();
    
    private static ClassLoader getServerIntegrationClassLoader()
