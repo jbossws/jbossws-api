@@ -1,7 +1,0 @@
-org.jboss.ws.api.addressing
-org.jboss.ws.api.annotation
-org.jboss.ws.api.binding
-org.jboss.ws.api.handler
-org.jboss.ws.api.monitoring
-org.jboss.ws.api.tools
-org.jboss.ws.api.util
