@@ -31,6 +31,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import javax.xml.namespace.QName;
 import javax.xml.parsers.DocumentBuilder;
@@ -64,6 +65,7 @@ import org.xml.sax.SAXException;
 public abstract class DOMUtils
 {
    private static Logger log = Logger.getLogger(DOMUtils.class);
+   private static ResourceBundle bundle = BundleUtils.getBundle(DOMUtils.class);
 
    /** Get the qname of the given node.
     */
@@ -567,6 +569,7 @@ public abstract class DOMUtils
       }
       catch (IOException e)
       {
+         log.error(BundleUtils.getMessage(bundle, "CAN_NOT_PARSE", xmlString));
          log.error("Cannot parse: " + xmlString);
          throw e;
       }

@@ -25,6 +25,7 @@
   
   <properties>
     <jboss-logging-spi.version>2.0.5.GA</jboss-logging-spi.version>
+    <junit.version>3.8.2</junit.version>
   </properties>
 
   <!-- Dependencies -->
@@ -37,10 +38,37 @@
       <version>${jboss-logging-spi.version}</version>
       <scope>provided</scope>
     </dependency>
+    
+    <!-- test dependencies -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+    
   </dependencies>
 
   <!-- Plugins -->
   <build>
+    <resources>
+      <resource>
+        <directory>src/main/java</directory>
+         <includes>
+          <include>**/*.properties</include>
+         </includes>
+      </resource>
+    </resources>
+
+    <testResources>
+      <testResource>
+        <directory>src/test/java</directory>
+        <includes>
+           <include>**</include>
+        </includes>
+      </testResource>
+    </testResources>
+
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
