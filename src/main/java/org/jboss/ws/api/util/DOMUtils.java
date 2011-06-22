@@ -111,7 +111,7 @@ public abstract class DOMUtils
          }
 
          if (namespaceURI.equals(""))
-            throw new IllegalArgumentException("Cannot find namespace uri for: " + qualifiedName);
+            throw new IllegalArgumentException(BundleUtils.getMessage(bundle, "CANNOT_FIND_NAMESPACE_URI_FOR",  qualifiedName));
       }
       else
       {
@@ -553,7 +553,7 @@ public abstract class DOMUtils
       }
       else
       {
-         throw new RuntimeException("Source type not implemented: " + source.getClass().getName());
+         throw new RuntimeException(BundleUtils.getMessage(bundle, "SOURCE_TYPE_NOT_IMPLEMENTED",  source.getClass()));
       }
 
       return retElement;
