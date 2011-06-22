@@ -21,6 +21,10 @@
  */
 package org.jboss.ws.api.annotation;
 
+import java.util.ResourceBundle;
+
+import org.jboss.ws.api.util.BundleUtils;
+
 /**
  * The transportGuarantee specifies that the communication
  * between client and server should be NONE, INTEGRAL, or
@@ -37,6 +41,7 @@ package org.jboss.ws.api.annotation;
  */
 public final class TransportGuarantee
 {
+   private static final ResourceBundle bundle = BundleUtils.getBundle(TransportGuarantee.class);
    
    /**
     * Application does not require any transport guarantees.
@@ -89,7 +94,7 @@ public final class TransportGuarantee
          }
       }
       
-      throw new IllegalArgumentException("Illegal transport guarantee value: " + s);
+      throw new IllegalArgumentException(BundleUtils.getMessage(bundle, "ILLEGAL_TRANSPORT_GUARANTEE",  s));
    }
    
 }

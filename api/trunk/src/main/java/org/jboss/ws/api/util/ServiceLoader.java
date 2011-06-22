@@ -32,6 +32,7 @@ import java.security.PrivilegedAction;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Properties;
+import java.util.ResourceBundle;
 import java.util.WeakHashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -57,6 +58,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public final class ServiceLoader
 {
+   private static final ResourceBundle bundle = BundleUtils.getBundle(ServiceLoader.class);
    /**
     * A synchronized weak hash map that keeps factory names retrieved using Service API (META-INF/services/*) for each classloader.
     * Weak keys are used to remove entries when classloaders are garbage collected; values are service-property-name -> factory name maps.
@@ -155,7 +157,7 @@ public final class ServiceLoader
       }
       catch (Throwable t)
       {
-         throw new IllegalStateException("Failed to load " + propertyName + ": " + factoryName, t);
+         throw new IllegalStateException(BundleUtils.getMessage(bundle, "FAILED_TO_LOAD", new Object[]{ propertyName, factoryName}),  t);
       }
       
       return factory;
@@ -205,7 +207,7 @@ public final class ServiceLoader
          }
          catch (Throwable t)
          {
-            throw new IllegalStateException("Failed to load " + propertyName + ": " + factoryName, t);
+            throw new IllegalStateException(BundleUtils.getMessage(bundle, "FAILED_TO_LOAD", new Object[]{ propertyName ,  factoryName}),  t);
          }
       }
 
@@ -248,7 +250,7 @@ public final class ServiceLoader
          }
          catch (Throwable t)
          {
-            throw new IllegalStateException("Failed to load " + propertyName + ": " + factoryName, t);
+            throw new IllegalStateException(BundleUtils.getMessage(bundle, "FAILED_TO_LOAD", new Object[]{ propertyName ,  factoryName}),  t);
          }
       }
 
@@ -269,7 +271,7 @@ public final class ServiceLoader
          }
          catch (Throwable t)
          {
-            throw new IllegalStateException("Failed to load: " + defaultFactory, t);
+            throw new IllegalStateException(BundleUtils.getMessage(bundle, "FAILED_TO_LOAD",  defaultFactory),  t);
          }
       }
 
@@ -312,7 +314,7 @@ public final class ServiceLoader
          }
          catch (IOException ex)
          {
-            throw new SecurityException("Cannot load properties: " + filename, ex);
+            throw new SecurityException(BundleUtils.getMessage(bundle, "CANNOT_LOAD_PROPERTIES",  filename),  ex);
          }
          finally
          {
