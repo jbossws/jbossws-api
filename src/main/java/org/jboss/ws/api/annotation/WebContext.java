@@ -45,11 +45,11 @@ public @interface WebContext {
    String contextRoot() default "";
    
    /** 
-    * The virtual hosts that the web service endpoint is deployed to.
+    * The virtual host that the web service endpoint is deployed to.
     * 
     * Applies to server side port components only.
     */
-   String[] virtualHosts() default {};
+   String virtualHost() default "";
    
    /** 
     * Relative path that is appended to the contextRoot to form fully qualified
