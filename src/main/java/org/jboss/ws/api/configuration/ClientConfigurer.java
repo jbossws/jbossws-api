@@ -30,6 +30,13 @@ import javax.xml.ws.BindingProvider;
  */
 public interface ClientConfigurer
 {
-   public void addConfigHandlers(BindingProvider port, String configFile, String configName);
+   /**
+    * Reads a client configuration and setups the specified BindingProvider accordingly
+    * 
+    * @param bp             The BindingProvider instance to setup
+    * @param configFile     The configuration file
+    * @param configName     The configuration name
+    */
+   public void addConfigHandlers(BindingProvider bp, String configFile, String configName);
 
 }
