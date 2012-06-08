@@ -24,19 +24,19 @@ package org.jboss.ws.api.configuration;
 import javax.xml.ws.BindingProvider;
 
 /**
- * A facility for setting a JBossWS Client Configuration
+ * JBossWS Client Configuration interface
  *
  * @author <a href="mailto:alessio.soldano@jboss.com">Alessio Soldano</a>
  */
 public interface ClientConfigurer
 {
    /**
-    * Reads a client configuration and setups the specified BindingProvider accordingly
+    * Reads a client configuration and setups the handlers in the provided BindingProvider accordingly.
     * 
     * @param bp             The BindingProvider instance to setup
     * @param configFile     The configuration file
     * @param configName     The configuration name
     */
-   public void addConfigHandlers(BindingProvider bp, String configFile, String configName);
+   public void setConfigHandlers(BindingProvider bp, String configFile, String configName);
 
 }
