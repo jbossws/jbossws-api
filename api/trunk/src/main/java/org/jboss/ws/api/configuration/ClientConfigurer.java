@@ -38,5 +38,14 @@ public interface ClientConfigurer
     * @param configName     The configuration name
     */
    public void setConfigHandlers(BindingProvider bp, String configFile, String configName);
+   
+   /**
+    * Reads a client configuration and setups the properties in the provided client proxy accordingly.
+    * 
+    * @param proxy          The client proxy (port)
+    * @param configFile     The configuration file
+    * @param configName     The configuration name
+    */
+   public void setConfigProperties(Object proxy, String configFile, String configName);
 
 }

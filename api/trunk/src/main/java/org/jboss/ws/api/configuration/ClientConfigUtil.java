@@ -24,7 +24,7 @@ package org.jboss.ws.api.configuration;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.Iterator;
-import java.util.ServiceLoader;
+import org.jboss.ws.api.util.ServiceLoader;
 
 import javax.xml.ws.BindingProvider;
 
@@ -49,17 +49,32 @@ public abstract class ClientConfigUtil
    }
    
    /**
-    * Resolves a ClientConfigurer instance by first using the defining classloader and
-    * failing that by using the current thread context classloader.
+    * Reads a client configuration and setups the properties in the provided proxy accordingly.
+    * This leverages the resolveClientConfigurer() method for getting the ClientConfigure to use.
+    * 
+    * @param bp             The client proxy (port) instance to setup
+    * @param configFile     The configuration file
+    * @param configName     The configuration name
+    */
+   public static void setConfigProperties(Object proxy, String configFile, String configName) {
+      ClientConfigurer configurer = resolveClientConfigurer();
+      configurer.setConfigProperties(proxy, configFile, configName);
+   }
+   
+   /**
+    * Resolves a ClientConfigurer instance by first using the current thread context classloader and
+    * failing that by using the defining classloader.
     * 
     * @return A ClientConfigurer instance
     */
    public static ClientConfigurer resolveClientConfigurer() {
-      Iterator<ClientConfigurer> it = ServiceLoader.load(ClientConfigurer.class, ClientConfigUtil.class.getClassLoader()).iterator();
-      if (!it.hasNext()) {
-         it = ServiceLoader.load(ClientConfigurer.class, getContextClassLoader()).iterator();
+      Iterator<ClientConfigurer> it = java.util.ServiceLoader.load(ClientConfigurer.class, getContextClassLoader()).iterator();
+      if (it.hasNext()) {
+         return it.next();
+      } else {
+         return (ClientConfigurer)ServiceLoader.loadService(ClientConfigurer.class.getName(),
+               "org.jboss.ws.common.configuration.ConfigHelper", ClientConfigUtil.class.getClassLoader());
       }
-      return it.next();
    }
    
    private static ClassLoader getContextClassLoader()
