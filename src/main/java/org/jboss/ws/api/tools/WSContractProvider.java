@@ -137,6 +137,14 @@ public abstract class WSContractProvider
     * @param directory the root directory for generated source code
     */
    public abstract void setSourceDirectory(File directory);
+   
+   /**
+    * Sets the soap:address to be used for the generated port in the wsdl.
+    * This is ignored if WSDL generation is disabled.
+    * 
+    * @param address
+    */
+   public abstract void setPortSoapAddress(String address);
 
    /**
     * Sets the ClassLoader used to discover types. This defaults to the one used
