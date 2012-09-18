@@ -24,7 +24,7 @@ package org.jboss.ws.api.addressing;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 
-import org.jboss.logging.Logger;
+import org.jboss.ws.api.Log;
 import org.jboss.ws.api.util.ServiceLoader;
 
 /**
@@ -115,10 +115,8 @@ public abstract class MAPBuilderFactory
          moduleClassLoader = (ClassLoader)moduleClass.getMethod("getClassLoader").invoke(module);
       } catch (Exception e) {
          //ignore, JBoss Modules might not be available at all
-         Logger log = Logger.getLogger(MAPBuilderFactory.class);
-         if (log.isTraceEnabled())
-         {
-            log.trace("Could not get " + JBOSSWS_SPI_MODULE + " module classloader: ", e);
+         if (Log.LOGGER.isTraceEnabled()) {
+            Log.LOGGER.couldNotGetModuleClassLoader(JBOSSWS_SPI_MODULE, e);
          }
       }
       return moduleClassLoader;

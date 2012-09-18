@@ -21,6 +21,9 @@
  */
 package org.jboss.ws.api.util;
 
+import static org.jboss.ws.api.Messages.MESSAGES;
+import static org.jboss.ws.api.Log.LOGGER;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -31,7 +34,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.ResourceBundle;
 
 import javax.xml.namespace.QName;
 import javax.xml.parsers.DocumentBuilder;
@@ -45,7 +47,6 @@ import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
-import org.jboss.logging.Logger;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -64,9 +65,6 @@ import org.xml.sax.SAXException;
  */
 public abstract class DOMUtils
 {
-   private static Logger log = Logger.getLogger(DOMUtils.class);
-   private static ResourceBundle bundle = BundleUtils.getBundle(DOMUtils.class);
-
    /** Get the qname of the given node.
     */
    public static QName getElementQName(Element el)
@@ -111,7 +109,7 @@ public abstract class DOMUtils
          }
 
          if (namespaceURI.equals(""))
-            throw new IllegalArgumentException(BundleUtils.getMessage(bundle, "CANNOT_FIND_NAMESPACE_URI_FOR",  qualifiedName));
+            throw MESSAGES.cannotFindNamespaceURI(qualifiedName);
       }
       else
       {
@@ -244,8 +242,8 @@ public abstract class DOMUtils
          // change an object in a way which is incorrect with regard to namespaces.
          if (uri == null && qname.startsWith("xmlns"))
          {
-            if (log.isTraceEnabled())
-               log.trace("Ignore attribute: [uri=" + uri + ",qname=" + qname + ",value=" + value + "]");
+            if (LOGGER.isTraceEnabled())
+               LOGGER.ignoringAttribute(uri, qname, value);
          }
          else
          {
@@ -553,7 +551,7 @@ public abstract class DOMUtils
       }
       else
       {
-         throw new RuntimeException(BundleUtils.getMessage(bundle, "SOURCE_TYPE_NOT_IMPLEMENTED",  source.getClass()));
+         throw MESSAGES.sourceTypeNotImplemented(source.getClass());
       }
 
       return retElement;
@@ -569,8 +567,7 @@ public abstract class DOMUtils
       }
       catch (IOException e)
       {
-         log.error(BundleUtils.getMessage(bundle, "CAN_NOT_PARSE", xmlString));
-         log.error("Cannot parse: " + xmlString);
+         LOGGER.cannotParse(xmlString);
          throw e;
       }
    }
@@ -636,14 +633,14 @@ public abstract class DOMUtils
    {
       if (prefix == null || prefix.length() == 0)
       {
-         if (log.isTraceEnabled())
-            log.trace("createElement {" + uri + "}" + localPart);
+         if (LOGGER.isTraceEnabled())
+            LOGGER.creatingElement(uri, prefix);
          return doc.createElementNS(uri, localPart);
       }
       else
       {
-         if (log.isTraceEnabled())
-            log.trace("createElement {" + uri + "}" + prefix + ":" + localPart);
+         if (LOGGER.isTraceEnabled())
+            LOGGER.creatingElement(uri, prefix, localPart);
          return doc.createElementNS(uri, prefix + ":" + localPart);
       }
    }

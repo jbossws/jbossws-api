@@ -21,12 +21,10 @@
  */
 package org.jboss.ws.api.handler;
 
-import java.util.ResourceBundle;
-
 import javax.xml.ws.handler.Handler;
 import javax.xml.ws.handler.MessageContext;
 
-import org.jboss.ws.api.util.BundleUtils;
+import org.jboss.ws.api.Messages;
 
 /**
  * A generic JAX-WS handler
@@ -36,7 +34,6 @@ import org.jboss.ws.api.util.BundleUtils;
  */
 public abstract class GenericHandler implements Handler
 {
-   private static final ResourceBundle bundle = BundleUtils.getBundle(GenericHandler.class);
    private String handlerName;
    
    public String getHandlerName()
@@ -53,7 +50,7 @@ public abstract class GenericHandler implements Handler
    {
       Boolean outbound = (Boolean)msgContext.get(MessageContext.MESSAGE_OUTBOUND_PROPERTY);
       if (outbound == null)
-         throw new IllegalStateException(BundleUtils.getMessage(bundle, "CANNOT_OBTAIN_REQUIRED_PROPERTY",  MessageContext.MESSAGE_OUTBOUND_PROPERTY));
+         throw Messages.MESSAGES.cannotObtainRequiredProperty(MessageContext.MESSAGE_OUTBOUND_PROPERTY);
 
       return outbound ? handleOutbound(msgContext) : handleInbound(msgContext);
    }

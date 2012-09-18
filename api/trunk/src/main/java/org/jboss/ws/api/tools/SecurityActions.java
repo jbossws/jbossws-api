@@ -25,9 +25,6 @@ import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.security.PrivilegedActionException;
 import java.security.PrivilegedExceptionAction;
-import java.util.ResourceBundle;
-
-import org.jboss.ws.api.util.BundleUtils;
 
 /**
  * Security actions for this package
@@ -38,7 +35,6 @@ import org.jboss.ws.api.util.BundleUtils;
  */
 class SecurityActions
 {
-   private static final ResourceBundle bundle = BundleUtils.getBundle(SecurityActions.class);
    /**
     * Get context classloader.
     * 
@@ -85,31 +81,16 @@ class SecurityActions
             return AccessController.doPrivileged(new PrivilegedExceptionAction<ClassLoader>() {
                public ClassLoader run() throws Exception
                {
-                  try
-                  {
-                     ClassLoader result = Thread.currentThread().getContextClassLoader();
-                     if (cl != null)
-                        Thread.currentThread().setContextClassLoader(cl);
-                     return result;
-                  }
-                  catch (Exception e)
-                  {
-                     throw e;
-                  }
-                  catch (Error e)
-                  {
-                     throw e;
-                  }
-                  catch (Throwable e)
-                  {
-                     throw new RuntimeException(BundleUtils.getMessage(bundle, "ERROR_SETTING_CONTEXT_CLASSLOADER"),  e);
-                  }
+                  ClassLoader result = Thread.currentThread().getContextClassLoader();
+                  if (cl != null)
+                     Thread.currentThread().setContextClassLoader(cl);
+                  return result;
                }
             });
          }
          catch (PrivilegedActionException e)
          {
-            throw new RuntimeException(BundleUtils.getMessage(bundle, "ERROR_RUNNING_PRIVILEGED_ACTION"),  e.getCause());
+            throw new RuntimeException(e);
          }
       }
    }

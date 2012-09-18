@@ -21,10 +21,8 @@
  */
 package org.jboss.ws.api.annotation;
 
-import java.util.ResourceBundle;
-
-import org.jboss.logging.Logger;
-import org.jboss.ws.api.util.BundleUtils;
+import org.jboss.ws.api.Log;
+import org.jboss.ws.api.Messages;
 
 /**
  * The authMethod is used to configure the authentication mechanism for the web service. 
@@ -35,9 +33,6 @@ import org.jboss.ws.api.util.BundleUtils;
  */
 public final class AuthMethod
 {
-   private static final Logger log = Logger.getLogger(AuthMethod.class);
-   private static final ResourceBundle bundle = BundleUtils.getBundle(AuthMethod.class);
-   
    /**
     * Basic authentication.
     */
@@ -59,7 +54,7 @@ public final class AuthMethod
     * Returns string representing correct {@link org.jboss.ws.api.annotation.AuthMethod} value.
     * @param s string to convert.
     * @return correct auth method value
-    * @throws IllegalArgumentException if <b>s</b> is <b>null</b> or contains unknown value.
+    * @throws IllegalArgumentException if <b>s</b> is <b>null</b>.
     */
    public static String valueOf(final String s)
    {
@@ -77,11 +72,11 @@ public final class AuthMethod
          {
             return AuthMethod.CLIENT_CERT;
          }
-         log.warn(BundleUtils.getMessage(bundle, "NON_STANDARD_METHOD", s));
+         Log.LOGGER.nonStandardMethod(s);
          return s;         
       }
       
-      throw new IllegalArgumentException(BundleUtils.getMessage(bundle, "ILLEGAL_AUTH_METHOD", s));
+      throw Messages.MESSAGES.illegalAuthMethod(s);
    }
    
 }
