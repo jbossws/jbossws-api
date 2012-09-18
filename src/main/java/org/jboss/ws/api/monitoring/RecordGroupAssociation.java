@@ -21,9 +21,9 @@
  */
 package org.jboss.ws.api.monitoring;
 
-import java.util.Stack;
+import static org.jboss.ws.api.Log.LOGGER;
 
-import org.jboss.logging.Logger;
+import java.util.Stack;
 
 /**
  * Associates the record group ID with the current thread. This is implemented internally
@@ -36,9 +36,6 @@ public class RecordGroupAssociation
 {
    private static ThreadLocal<Stack<String>> groupIDAssoc = new ThreadLocal<Stack<String>>();
    
-   // provide logging
-   private static Logger log = Logger.getLogger(RecordGroupAssociation.class);
-  
    /**
     * Associates the specified groupID to the current thread
     * 
@@ -46,7 +43,7 @@ public class RecordGroupAssociation
     */
    public static void pushGroupID(String groupID)
    {
-      if(log.isTraceEnabled()) log.trace("pushGroupID: " + groupID + " (Thread " +Thread.currentThread().getName()+ ")");
+      if (LOGGER.isTraceEnabled()) LOGGER.pushGroupID(groupID, Thread.currentThread().getName());
       Stack<String> stack = groupIDAssoc.get();
       if (stack == null)
       {
@@ -69,7 +66,7 @@ public class RecordGroupAssociation
       {
          groupID = stack.peek();
       }
-      if(log.isTraceEnabled()) log.trace("peekGroupID: " + groupID + " (Thread " +Thread.currentThread().getName()+ ")");
+      if (LOGGER.isTraceEnabled()) LOGGER.peekGroupID(groupID, Thread.currentThread().getName());
       return groupID;
    }
 
@@ -86,7 +83,7 @@ public class RecordGroupAssociation
       {
          groupID = stack.pop();
       }
-      if(log.isTraceEnabled()) log.trace("popGroupID: " + groupID +" (Thread " +Thread.currentThread().getName()+ ")");
+      if (LOGGER.isTraceEnabled()) LOGGER.popGroupID(groupID, Thread.currentThread().getName());
       return groupID;
    }
    

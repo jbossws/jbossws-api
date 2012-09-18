@@ -21,9 +21,7 @@
  */
 package org.jboss.ws.api.annotation;
 
-import java.util.ResourceBundle;
-
-import org.jboss.ws.api.util.BundleUtils;
+import org.jboss.ws.api.Messages;
 
 /**
  * The transportGuarantee specifies that the communication
@@ -41,8 +39,6 @@ import org.jboss.ws.api.util.BundleUtils;
  */
 public final class TransportGuarantee
 {
-   private static final ResourceBundle bundle = BundleUtils.getBundle(TransportGuarantee.class);
-   
    /**
     * Application does not require any transport guarantees.
     */
@@ -94,7 +90,7 @@ public final class TransportGuarantee
          }
       }
       
-      throw new IllegalArgumentException(BundleUtils.getMessage(bundle, "ILLEGAL_TRANSPORT_GUARANTEE",  s));
+      throw Messages.MESSAGES.illegalTransportGuarantee(s);
    }
    
 }
