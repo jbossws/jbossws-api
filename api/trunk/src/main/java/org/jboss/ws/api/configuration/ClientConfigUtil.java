@@ -52,7 +52,7 @@ public abstract class ClientConfigUtil
     * Reads a client configuration and setups the properties in the provided proxy accordingly.
     * This leverages the resolveClientConfigurer() method for getting the ClientConfigure to use.
     * 
-    * @param bp             The client proxy (port) instance to setup
+    * @param proxy             The client proxy (port) instance to setup
     * @param configFile     The configuration file
     * @param configName     The configuration name
     */
