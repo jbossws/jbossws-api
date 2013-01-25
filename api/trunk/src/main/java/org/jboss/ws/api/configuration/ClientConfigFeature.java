@@ -44,10 +44,30 @@ public final class ClientConfigFeature extends AbstractClientFeature
       this.configurer = ClientConfigUtil.resolveClientConfigurer();
    }
    
+   /**
+    * Creates a feature for initializing the JAXWS client using
+    * the specified predefined configuration.
+    * 
+    * @param configFile     The config file to read the config from;
+    *                       null if the config is meant to be read
+    *                       from the AS model.
+    * @param configName     The config name to read.
+    */
    public ClientConfigFeature(String configFile, String configName) {
       this(configFile, configName, false);
    }
    
+   /**
+    * Creates a feature for initializing the JAXWS client using
+    * the specified predefined configuration.
+    * 
+    * @param configFile     The config file to read the config from;
+    *                       null if the config is meant to be read
+    *                       from the AS model.
+    * @param configName     The config name to read.
+    * @param configureProperties    Whether or not to set properties
+    *                       from the specified config (default false)
+    */
    public ClientConfigFeature(String configFile, String configName, boolean configureProperties) {
       this();
       this.configFile = configFile;
