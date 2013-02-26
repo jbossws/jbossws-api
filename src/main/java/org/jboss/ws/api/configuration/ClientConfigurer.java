@@ -42,10 +42,10 @@ public interface ClientConfigurer
    /**
     * Reads a client configuration and setups the properties in the provided client proxy accordingly.
     * 
-    * @param proxy          The client proxy (port)
+    * @param obj            The client proxy (port) or dispatch
     * @param configFile     The configuration file
     * @param configName     The configuration name
     */
-   public void setConfigProperties(Object proxy, String configFile, String configName);
+   public void setConfigProperties(Object obj, String configFile, String configName);
 
 }
