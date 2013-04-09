@@ -177,6 +177,13 @@ public abstract class WSContractConsumer
     * @param target  the JAX-WS specification version.
     */
    public abstract void setTarget(String target);
+   
+   
+   /**
+    * Set the clientjar file name 
+    * @param clientJar  client Jar file name 
+    */
+   public abstract void setClientJar(File clientJar);
 
    /**
     * Generate the required artifacts using the specified WSDL URL. This method
