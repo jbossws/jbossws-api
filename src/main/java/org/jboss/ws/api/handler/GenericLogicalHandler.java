@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source.
- * Copyright 2006, Red Hat Middleware LLC, and individual contributors
+ * Copyright 2014, Red Hat Middleware LLC, and individual contributors
  * as indicated by the @author tags. See the copyright.txt file in the
  * distribution for a full listing of individual contributors.
  *
@@ -30,6 +30,6 @@ import javax.xml.ws.handler.LogicalMessageContext;
  * @author <a href="mailto:Thomas.Diesler@jboss.org">Thomas Diesler</a>
  * @since 13-Aug-2006
  */
-public class GenericLogicalHandler<C extends LogicalMessageContext> extends GenericHandler implements LogicalHandler
+public class GenericLogicalHandler<C extends LogicalMessageContext> extends GenericHandler<C> implements LogicalHandler<C>
 {
 }
