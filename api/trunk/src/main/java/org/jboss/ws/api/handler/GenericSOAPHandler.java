@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source.
- * Copyright 2006, Red Hat Middleware LLC, and individual contributors
+ * Copyright 2014, Red Hat Middleware LLC, and individual contributors
  * as indicated by the @author tags. See the copyright.txt file in the
  * distribution for a full listing of individual contributors.
  *
@@ -21,23 +21,25 @@
  */
 package org.jboss.ws.api.handler;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.xml.namespace.QName;
-import javax.xml.ws.handler.LogicalMessageContext;
 import javax.xml.ws.handler.soap.SOAPHandler;
+import javax.xml.ws.handler.soap.SOAPMessageContext;
 
 /**
  * A generic JAX-WS soap handler
  *
- * @author Thomas.Diesler@jboss.org
+ * @author <a href="mailto:Thomas.Diesler@jboss.org">Thomas Diesler</a>
+ * @author <a href="mailto:alessio.soldano@jboss.com">Alessio Soldano</a>
  * @since 13-Aug-2006
  */
-public abstract class GenericSOAPHandler<C extends LogicalMessageContext> extends GenericHandler implements SOAPHandler
+public abstract class GenericSOAPHandler<C extends SOAPMessageContext> extends GenericHandler<C> implements SOAPHandler<C>
 {
    // The header blocks that can be processed by this Handler instance
-   private Set<QName> headers = new HashSet<QName>();
+   private volatile Set<QName> headers = null;
    
    /**
     * Gets the header blocks that can be processed by this Handler instance.
@@ -46,7 +48,11 @@ public abstract class GenericSOAPHandler<C extends LogicalMessageContext> extend
     */
    public Set<QName> getHeaders()
    {
-      return headers;
+      if (headers == null) {
+         return Collections.emptySet();
+      } else {
+         return headers;
+      }
    }
 
    /**
@@ -56,6 +62,6 @@ public abstract class GenericSOAPHandler<C extends LogicalMessageContext> extend
     */
    public void setHeaders(Set<QName> headers)
    {
-      this.headers = headers;
+      this.headers = Collections.unmodifiableSet(new HashSet<QName>(headers));
    }
 }

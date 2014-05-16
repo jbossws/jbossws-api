@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source.
- * Copyright 2006, Red Hat Middleware LLC, and individual contributors
+ * Copyright 2014, Red Hat Middleware LLC, and individual contributors
  * as indicated by the @author tags. See the copyright.txt file in the
  * distribution for a full listing of individual contributors.
  *
@@ -30,11 +30,12 @@ import org.jboss.ws.api.Messages;
  * A generic JAX-WS handler
  *
  * @author <a href="mailto:Thomas.Diesler@jboss.org">Thomas Diesler</a>
+ * @author <a href="mailto:alessio.soldano@jboss.com">Alessio Soldano</a>
  * @since 13-Aug-2006
  */
-public abstract class GenericHandler implements Handler
+public abstract class GenericHandler<C extends MessageContext> implements Handler<C>
 {
-   private String handlerName;
+   private volatile String handlerName;
    
    public String getHandlerName()
    {
@@ -46,7 +47,7 @@ public abstract class GenericHandler implements Handler
       this.handlerName = handlerName;
    }
 
-   public boolean handleMessage(MessageContext msgContext)
+   public boolean handleMessage(C msgContext)
    {
       Boolean outbound = (Boolean)msgContext.get(MessageContext.MESSAGE_OUTBOUND_PROPERTY);
       if (outbound == null)
@@ -55,17 +56,17 @@ public abstract class GenericHandler implements Handler
       return outbound ? handleOutbound(msgContext) : handleInbound(msgContext);
    }
 
-   protected boolean handleOutbound(MessageContext msgContext)
+   protected boolean handleOutbound(C msgContext)
    {
       return true;
    }
 
-   protected boolean handleInbound(MessageContext msgContext)
+   protected boolean handleInbound(C msgContext)
    {
       return true;
    }
 
-   public boolean handleFault(MessageContext messagecontext)
+   public boolean handleFault(C messagecontext)
    {
       return true;
    }
