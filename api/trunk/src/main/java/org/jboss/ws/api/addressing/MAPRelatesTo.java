@@ -36,6 +36,4 @@ public interface MAPRelatesTo
 
    public QName getType();
 
-   public void setType(QName type);
-
 }
