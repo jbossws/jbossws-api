@@ -142,6 +142,14 @@ public abstract class WSContractConsumer
     * @param wsdlLocation the custom WSDL location to use in generated source
     */
    public abstract void setWsdlLocation(String wsdlLocation);
+   
+   
+   /**
+    * Sets the charset encoding to be used for generating sources
+    *  
+    * @param encoding the charset encoding to be used for generating sources
+    */
+   public abstract void setEncoding(String encoding);
 
    /**
     * Sets the PrintStream to use for status feedback. The simplest example
