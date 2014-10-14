@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source.
- * Copyright 2006, Red Hat Middleware LLC, and individual contributors
+ * Copyright 2014, Red Hat Middleware LLC, and individual contributors
  * as indicated by the @author tags. See the copyright.txt file in the
  * distribution for a full listing of individual contributors.
  *
@@ -94,5 +94,10 @@ public @interface WebContext {
     * Protect access to WSDL. See http://jira.jboss.org/jira/browse/JBWS-723   
     */
    boolean secureWSDLAccess() default false;
+   
+   /**
+    * Description of the resource being accessed
+    */
+   String realmName() default ""; 
     
 }
