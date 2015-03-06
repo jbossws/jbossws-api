@@ -207,7 +207,7 @@ public abstract class DOMUtils
       return (attrVal != null ? new Integer(attrVal) : null);
    }
 
-   /** Get the attributes as Map<QName, String>
+   /** Get the attributes as Map&lt;QName, String&gt;
     */
    public static Map<QName, String> getAttributes(Element el)
    {
