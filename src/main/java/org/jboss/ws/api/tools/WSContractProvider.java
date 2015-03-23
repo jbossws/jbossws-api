@@ -142,7 +142,7 @@ public abstract class WSContractProvider
     * Sets the soap:address to be used for the generated port in the wsdl.
     * This is ignored if WSDL generation is disabled.
     * 
-    * @param address
+    * @param address  soap address
     */
    public abstract void setPortSoapAddress(String address);
 

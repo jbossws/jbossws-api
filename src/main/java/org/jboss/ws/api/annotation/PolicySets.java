@@ -39,7 +39,8 @@ public @interface PolicySets {
    
    /**
     * The names of the policy sets to be applied
-    * 
+    *
+    * @return  string
     */
    String[] value();
 }

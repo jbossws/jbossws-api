@@ -27,6 +27,7 @@
     <jboss-logging.version>3.1.2.GA</jboss-logging.version>
     <jboss-logging-processor.version>1.0.3.Final</jboss-logging-processor.version>
     <junit.version>3.8.2</junit.version>
+    <jboss-logging-annotations.version>1.2.0.Final</jboss-logging-annotations.version>
   </properties>
 
   <!-- Dependencies -->
@@ -45,7 +46,12 @@
       <version>${jboss-logging-processor.version}</version>
       <scope>provided</scope>
     </dependency>
-
+    <dependency>
+      <groupId>org.jboss.logging</groupId>
+      <artifactId>jboss-logging-annotations</artifactId>
+      <version>${jboss-logging-annotations.version}</version>
+      <scope>provided</scope>
+    </dependency>
 
     <!-- test dependencies -->
     <dependency>

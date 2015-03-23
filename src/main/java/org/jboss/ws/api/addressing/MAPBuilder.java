@@ -66,14 +66,17 @@ public interface MAPBuilder
 
    /**
     * Creates a new {@link org.jboss.ws.api.addressing.MAPEndpoint} instance
-    * 
+    *
+    * @param address  endpoint address
     * @return a {@link org.jboss.ws.api.addressing.MAPEndpoint} instance
     */
    public MAPEndpoint newEndpoint(String address);
 
    /**
     * Creates a new {@link org.jboss.ws.api.addressing.MAPRelatesTo} instance
-    * 
+    *
+    * @param id    identifier
+    * @param type  Qname
     * @return a {@link org.jboss.ws.api.addressing.MAPRelatesTo} instance
     */
    public MAPRelatesTo newRelatesTo(String id, QName type);

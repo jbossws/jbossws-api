@@ -42,7 +42,7 @@ public abstract class AbstractClientFeature extends WebServiceFeature
     * Initializes the provided JAXWS client component; this is called by the
     * the JBossWS impl of JAXWS Provider.
     * 
-    * @param obj
+    * @param obj  client component
     */
    public void initialize(Object obj)
    {
@@ -55,7 +55,7 @@ public abstract class AbstractClientFeature extends WebServiceFeature
    /**
     * Initializes the provided BindingProvider instance 
     * 
-    * @param bp
+    * @param bp   binding provider
     */
    protected void initializeBindingProvider(BindingProvider bp)
    {

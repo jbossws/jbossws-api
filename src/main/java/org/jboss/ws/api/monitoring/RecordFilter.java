@@ -33,11 +33,17 @@ public interface RecordFilter extends Cloneable, Serializable
 {
    /**
     * Returns true if the filter matches the given record.
+    *
+    * @param record   record
+    * @return  true success
     */
    boolean match(Record record);
    
    /**
     * RecordFilters must override Object.clone()
+    *
+    * @return  Object   recode filter
+    * @throws CloneNotSupportedException  exception
     */
    Object clone() throws CloneNotSupportedException;
 }
