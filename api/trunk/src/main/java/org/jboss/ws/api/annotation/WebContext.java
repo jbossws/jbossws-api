@@ -40,7 +40,9 @@ public @interface WebContext {
     * The contextRoot element specifies the context root that the web service endpoint is deployed to.
     * If it is not specified it will be derived from the deployment short name.
     * 
-    * Applies to server side port components only. 
+    * Applies to server side port components only
+    *
+    * @return  string
     */
    String contextRoot() default "";
    
@@ -48,6 +50,8 @@ public @interface WebContext {
     * The virtual host that the web service endpoint is deployed to.
     * 
     * Applies to server side port components only.
+    *
+    * @return string
     */
    String virtualHost() default "";
    
@@ -55,7 +59,9 @@ public @interface WebContext {
     * Relative path that is appended to the contextRoot to form fully qualified
     * endpoint address for the web service endpoint.
     * 
-    * Applies to server side port components only. 
+    * Applies to server side port components only.
+    *
+    * @return string
     */
    String urlPattern() default "";
 
@@ -68,6 +74,8 @@ public @interface WebContext {
     * be specified.
     * 
     * @see AuthMethod
+    *
+    * @return string
     */
    String authMethod() default "";
 
@@ -84,6 +92,8 @@ public @interface WebContext {
     * CONFIDENTIAL flag will indicate that the use of SSL is required.
     * 
     * @see TransportGuarantee
+    *
+    * @return string
     */
    String transportGuarantee() default "";
 
@@ -91,12 +101,16 @@ public @interface WebContext {
     * A secure endpoint does not secure wsdl access by default.
     * Explicitly setting secureWSDLAccess overrides this behaviour.
     * 
-    * Protect access to WSDL. See http://jira.jboss.org/jira/browse/JBWS-723   
+    * Protect access to WSDL. See http://jira.jboss.org/jira/browse/JBWS-723
+    *
+    * @return boolean
     */
    boolean secureWSDLAccess() default false;
    
    /**
     * Description of the resource being accessed
+    *
+    * @return string
     */
    String realmName() default ""; 
     

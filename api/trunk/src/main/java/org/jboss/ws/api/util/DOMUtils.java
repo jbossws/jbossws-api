@@ -65,7 +65,11 @@ import org.xml.sax.SAXException;
  */
 public abstract class DOMUtils
 {
-   /** Get the qname of the given node.
+   /**
+    * Get the qname of the given node.
+    *
+    * @param el  node
+    * @return  Qname
     */
    public static QName getElementQName(Element el)
    {
@@ -74,6 +78,10 @@ public abstract class DOMUtils
    }
 
    /** Transform the given qualified name into a QName
+    *
+    * @param el  node
+    * @param qualifiedName  qualified name
+    * @return  QName
     */
    public static QName resolveQName(Element el, String qualifiedName)
    {
@@ -128,6 +136,8 @@ public abstract class DOMUtils
 
    /** Get the value from the given attribute
     *
+    * @param el   element
+    * @param attrName   attribute name
     * @return null if the attribute value is empty or the attribute is not present
     */
    public static String getAttributeValue(Element el, String attrName)
@@ -137,6 +147,8 @@ public abstract class DOMUtils
 
    /** Get the value from the given attribute
     *
+    * @param el   element
+    * @param attrName   attribute name
     * @return null if the attribute value is empty or the attribute is not present
     */
    public static String getAttributeValue(Element el, QName attrName)
@@ -153,7 +165,12 @@ public abstract class DOMUtils
       return attr;
    }
 
-   /** Get the qname value from the given attribute
+   /**
+    * Get the qname value from the given attribute
+    *
+    * @param el   element
+    * @param attrName   attribute name
+    * @return  QName
     */
    public static QName getAttributeValueAsQName(Element el, String attrName)
    {
@@ -161,7 +178,12 @@ public abstract class DOMUtils
 
    }
 
-   /** Get the qname value from the given attribute
+   /**
+    * Get the qname value from the given attribute
+    *
+    * @param el   element
+    * @param attrName   attribute name
+    * @return  QName
     */
    public static QName getAttributeValueAsQName(Element el, QName attrName)
    {
@@ -176,14 +198,24 @@ public abstract class DOMUtils
       return qname;
    }
 
-   /** Get the boolean value from the given attribute
+   /**
+    * Get the boolean value from the given attribute
+    *
+    * @param el   element
+    * @param attrName   attribute name
+    * @return  boolean
     */
    public static boolean getAttributeValueAsBoolean(Element el, String attrName)
    {
       return getAttributeValueAsBoolean(el, new QName(attrName));
    }
 
-   /** Get the boolean value from the given attribute
+   /**
+    * Get the boolean value from the given attribute
+    *
+    * @param el   element
+    * @param attrName   attribute name
+    * @return  boolean
     */
    public static boolean getAttributeValueAsBoolean(Element el, QName attrName)
    {
@@ -192,14 +224,24 @@ public abstract class DOMUtils
       return ret;
    }
 
-   /** Get the integer value from the given attribute
+   /**
+    * Get the integer value from the given attribute
+    *
+    * @param el   element
+    * @param attrName   attribute name
+    * @return  Integer
     */
    public static Integer getAttributeValueAsInteger(Element el, String attrName)
    {
       return getAttributeValueAsInteger(el, new QName(attrName));
    }
 
-   /** Get the integer value from the given attribute
+   /**
+    * Get the integer value from the given attribute
+    *
+    * @param el   element
+    * @param attrName   attribute name
+    * @return  Integer
     */
    public static Integer getAttributeValueAsInteger(Element el, QName attrName)
    {
@@ -207,7 +249,11 @@ public abstract class DOMUtils
       return (attrVal != null ? new Integer(attrVal) : null);
    }
 
-   /** Get the attributes as Map&lt;QName, String&gt;
+   /**
+    * Get the attributes as Map&lt;QName, String&gt;
+    *
+    * @param el   element
+    * @return  Map
     */
    public static Map<QName, String> getAttributes(Element el)
    {
@@ -225,7 +271,11 @@ public abstract class DOMUtils
       return attmap;
    }
 
-   /** Copy attributes between elements
+   /**
+    * Copy attributes between elements
+    *
+    * @param destElement  element
+    * @param srcElement   element
     */
    public static void copyAttributes(Element destElement, Element srcElement)
    {
@@ -252,7 +302,11 @@ public abstract class DOMUtils
       }
    }
 
-   /** True if the node has text child elements only
+   /**
+    * True if the node has text child elements only
+    *
+    * @param node  start node
+    * @return  True if the node has text child
     */
    public static boolean hasTextChildNodesOnly(Node node)
    {
@@ -271,7 +325,11 @@ public abstract class DOMUtils
       return true;
    }
 
-   /** True if the node has child elements
+   /**
+    * True if the node has child elements
+    *
+    * @param node  start node
+    * @return  true when child has elements
     */
    public static boolean hasChildElements(Node node)
    {
@@ -286,7 +344,11 @@ public abstract class DOMUtils
       return false;
    }
 
-   /** Gets child elements
+   /**
+    * Gets child elements
+    *
+    * @param node  start node
+    * @return  Iterator
     */
    public static Iterator<Element> getChildElements(Node node)
    {
@@ -302,7 +364,11 @@ public abstract class DOMUtils
       return list.iterator();
    }
 
-   /** Get the concatenated text content, or null.
+   /**
+    * Get the concatenated text content, or null.
+    *
+    * @param node  node
+    * @return  string
     */
    public static String getTextContent(Node node)
    {
@@ -322,14 +388,23 @@ public abstract class DOMUtils
       return (hasTextContent ? buffer.toString() : null);
    }
 
-   /** Gets the first child element
+   /**
+    * Gets the first child element
+    *
+    * @param node   start node
+    * @return   element
     */
    public static Element getFirstChildElement(Node node)
    {
       return getFirstChildElement(node, false);
    }
 
-   /** Gets the first child element
+   /**
+    * Gets the first child element
+    *
+    * @param node  child
+    * @param recursive  recurse flag
+    * @return  element
     */
    public static Element getFirstChildElement(Node node, boolean recursive)
    {
@@ -337,27 +412,48 @@ public abstract class DOMUtils
    }
 
    /** Gets the first child element for a given local name without namespace
+    *
+    * @param node   child
+    * @param nodeName   name
+    * @return  element
     */
    public static Element getFirstChildElement(Node node, String nodeName)
    {
       return getFirstChildElement(node, nodeName, false);
    }
 
-   /** Gets the first child element for a given local name without namespace
+   /**
+    * Gets the first child element for a given local name without namespace
+    *
+    * @param node  child
+    * @param nodeName  name
+    * @param recursive   recurse flag
+    * @return   element
     */
    public static Element getFirstChildElement(Node node, String nodeName, boolean recursive)
    {
       return getFirstChildElementIntern(node, new QName(nodeName), recursive);
    }
 
-   /** Gets the first child element for a given qname
+   /**
+    * Gets the first child element for a given qname
+    *
+    * @param node  child
+    * @param nodeName  name
+    * @return   element
     */
    public static Element getFirstChildElement(Node node, QName nodeName)
    {
       return getFirstChildElement(node, nodeName, false);
    }
 
-   /** Gets the first child element for a given qname
+   /**
+    * Gets the first child element for a given qname
+    *
+    * @param node  child
+    * @param nodeName  name
+    * @param recursive  recurse flag
+    * @return   element
     */
    public static Element getFirstChildElement(Node node, QName nodeName, boolean recursive)
    {
@@ -375,28 +471,50 @@ public abstract class DOMUtils
       return childElement;
    }
 
-   /** Gets the child elements for a given local name without namespace
+   /**
+    * Gets the child elements for a given local name without namespace
+    *
+    * @param node child
+    * @param nodeName  name
+    * @return  Iterator
     */
    public static Iterator<Element> getChildElements(Node node, String nodeName)
    {
       return getChildElements(node, nodeName, false);
    }
 
-   /** Gets the child elements for a given local name without namespace
+   /**
+    * Gets the child elements for a given local name without namespace
+    *
+    * @param node  child
+    * @param nodeName  name
+    * @param recursive  recurse flag
+    * @return  Iterator
     */
    public static Iterator<Element> getChildElements(Node node, String nodeName, boolean recursive)
    {
       return getChildElementsIntern(node, new QName(nodeName), recursive);
    }
 
-   /** Gets the child element for a given qname
+   /**
+    * Gets the child element for a given qname
+    *
+    * @param node  child
+    * @param nodeName   name
+    * @return  Iterator
     */
    public static Iterator<Element> getChildElements(Node node, QName nodeName)
    {
       return getChildElements(node, nodeName, false);
    }
 
-   /** Gets the child element for a given qname
+   /**
+    * Gets the child element for a given qname
+    *
+    * @param node    child
+    * @param nodeName  name
+    * @param recursive   recurse flag
+    * @return  Iterator
     */
    public static Iterator<Element> getChildElements(Node node, QName nodeName, boolean recursive)
    {
@@ -482,7 +600,11 @@ public abstract class DOMUtils
       return getChildElementsAsListIntern(node, nodeName, recursive).iterator();
    }
 
-   /** Gets parent element or null if there is none
+   /**
+    * Gets parent element or null if there is none
+    *
+    * @param node  child
+    * @return  element
     */
    public static Element getParentElement(Node node)
    {
@@ -557,7 +679,13 @@ public abstract class DOMUtils
       return retElement;
    }
 
-   /** Parse the given XML string and return the root Element
+   /**
+    * Parse the given XML string and return the root Element
+    *
+    * @param xmlString   string to be parsed
+    * @param builder     document builder
+    * @return    element
+    * @throws IOException    exception
     */
    public static Element parse(String xmlString, DocumentBuilder builder) throws IOException
    {
@@ -572,7 +700,13 @@ public abstract class DOMUtils
       }
    }
 
-   /** Parse the given XML stream and return the root Element
+   /**
+    * Parse the given XML stream and return the root Element
+    *
+    * @param xmlStream    input stream
+    * @param builder     document builder
+    * @return  element
+    * @throws IOException   exception
     */
    public static Element parse(InputStream xmlStream, DocumentBuilder builder) throws IOException
    {
@@ -595,7 +729,13 @@ public abstract class DOMUtils
       }
    }
 
-   /** Parse the given input source and return the root Element
+   /**
+    * Parse the given input source and return the root Element
+    *
+    * @param source   input source
+    * @param builder  document builder
+    * @return  element
+    * @throws IOException   exception
     */
    public static Element parse(InputSource source, DocumentBuilder builder) throws IOException
    {
@@ -627,7 +767,14 @@ public abstract class DOMUtils
       }
    }
 
-   /** Create an Element for a given name, prefix and uri
+   /**
+    * Create an Element for a given name, prefix and uri
+    *
+    * @param localPart   xml local part
+    * @param prefix      xml prefix
+    * @param uri         uri
+    * @param doc         document
+    * @return  element
     */
    public static Element createElement(String localPart, String prefix, String uri, Document doc)
    {

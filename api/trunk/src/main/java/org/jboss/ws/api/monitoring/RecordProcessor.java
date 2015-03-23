@@ -190,6 +190,9 @@ public interface RecordProcessor extends Cloneable, Serializable
 
    /**
     * RecordFilters must override Object.clone()
+    *
+    * @return object
+    * @throws CloneNotSupportedException  exception
     */
    Object clone() throws CloneNotSupportedException;
 }

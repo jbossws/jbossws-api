@@ -54,7 +54,7 @@ public interface Record extends Serializable
    /**
     * Sets the groupID
     * 
-    * @param groupID
+    * @param groupID  id
     */
    public void setGroupID(String groupID);
    
@@ -68,7 +68,7 @@ public interface Record extends Serializable
    /**
     * Sets the date of the record
     * 
-    * @param date
+    * @param date   date
     */
    public void setDate(Date date);
    
@@ -82,7 +82,7 @@ public interface Record extends Serializable
    /**
     * Sets the source host
     * 
-    * @param host
+    * @param host   source host
     */
    public void setSourceHost(String host);
    
@@ -96,7 +96,7 @@ public interface Record extends Serializable
    /**
     * Sets the destination host
     * 
-    * @param host
+    * @param host  destination host
     */
    public void setDestinationHost(String host);
    
@@ -110,7 +110,7 @@ public interface Record extends Serializable
    /**
     * Sets the message type
     * 
-    * @param type
+    * @param type  message type
     */
    public void setMessageType(MessageType type);
    
@@ -125,7 +125,7 @@ public interface Record extends Serializable
    /**
     * Sets the SOAP message envelope
     * 
-    * @param envelope
+    * @param envelope   SOAP message envelope
     */
    public void setEnvelope(String envelope);
    
@@ -139,15 +139,15 @@ public interface Record extends Serializable
    /**
     * Adds a HTTP header to the record
     * 
-    * @param key
-    * @param value
+    * @param key  id
+    * @param value   value
     */
    public void addHeaders(String key, List<String> value);
 
    /**
     * Sets the HTTP headers of the record
     * 
-    * @param headers
+    * @param headers  HTTP headers
     */
    public void setHeaders(Map<String, List<String>> headers);
    
@@ -161,7 +161,7 @@ public interface Record extends Serializable
    /**
     * Sets the record's operation
     * 
-    * @param operation
+    * @param operation   record operation
     */
    public void setOperation(QName operation);
 }

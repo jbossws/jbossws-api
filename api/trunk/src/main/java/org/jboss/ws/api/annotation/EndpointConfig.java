@@ -39,6 +39,8 @@ public @interface EndpointConfig {
    /**
     * The configName gives the configuration name that must be present in the configuration given by configFile.
     * If configName is not specified, the standard endpoint configuration is used.
+    *
+    * @return string
     */
    String configName() default "";
 
@@ -46,6 +48,7 @@ public @interface EndpointConfig {
     * The configFile element is a URL or resource name for the configuration.
     * The default value references the current AS configuration.
     *
+    * @return  string
     */
    String configFile() default "";
 }
