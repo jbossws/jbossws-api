@@ -21,12 +21,11 @@
  */
 package org.jboss.ws.api.tools;
 
-import org.jboss.ws.api.tools.WSContractProvider;
-
 /**
  * Creates {@link WSContractProvider} implementations.
  * 
  * @author <a href="mailto:jason.greene@jboss.com">Jason T. Greene</a>
+ * @author <a href="mailto:ropalka@redhat.com">Richard Opalka</a>
  */
 public interface WSContractProviderFactory
 {
@@ -39,5 +38,5 @@ public interface WSContractProviderFactory
     * @param loader the ClassLoader for type discovery
     * @return a new {@link WSContractProvider}
     */
-   public WSContractProvider createProvider(ClassLoader loader);
+   WSContractProvider createProvider(ClassLoader loader);
 }

@@ -1,4 +1,19 @@
-.classpath
+# ignore Maven generated target folders
+~
+target
+# ignore eclipse files
 .project
-.settings/
-target/
+.classpath
+.settings
+.metadata
+# ignore IDEA files
+*.iml
+*.ipr
+*.iws
+.idea
+# ignore NetBeans files
+nbactions.xml
+nb-configuration.xml
+catalog.xml
+nbproject
+
