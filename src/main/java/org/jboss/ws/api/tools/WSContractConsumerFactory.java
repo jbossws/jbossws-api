@@ -21,12 +21,11 @@
  */
 package org.jboss.ws.api.tools;
 
-import org.jboss.ws.api.tools.WSContractConsumer;
-
 /**
  * Creates {@link WSContractConsumer} implementations.
  * 
  * @author <a href="mailto:jason.greene@jboss.com">Jason T. Greene</a>
+ * @author <a href="mailto:ropalka@redhat.com">Richard Opalka</a>
  */
 public interface WSContractConsumerFactory
 {
@@ -36,5 +35,5 @@ public interface WSContractConsumerFactory
     * 
     * @return a new {@link WSContractConsumer}
     */
-   public WSContractConsumer createConsumer();
+   WSContractConsumer createConsumer();
 }

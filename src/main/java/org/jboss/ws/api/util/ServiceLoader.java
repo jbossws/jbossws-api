@@ -24,8 +24,6 @@ package org.jboss.ws.api.util;
 import static org.jboss.ws.api.Messages.MESSAGES;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -33,7 +31,6 @@ import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.Collections;
 import java.util.Map;
-import java.util.Properties;
 import java.util.WeakHashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -43,10 +40,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * <li>If a resource file with the given name is found in META-INF/services/..., then
  * its first line, if present, is used as the UTF-8 encoded name of the implementation class.</li>
  * 
- * <li>If the ${java.home}/lib/jaxws.properties file exists and it is readable by the 
- * java.util.Properties.load(InputStream) method and it contains an entry whose key is 
- * the given name, then the value of that entry is used as the name of the implementation class.</li>
- * 
  * <li>If a system property with the given name is defined, then its value is used
  * as the name of the implementation class.</li>
  * 
@@ -55,6 +48,7 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * @author <a href="mailto:Thomas.Diesler@jboss.com">Thomas Diesler</a>
  * @author <a href="mailto:alessio.soldano@jboss.com">Alessio Soldano</a>
+ * @author <a href="mailto:ropalka@redhat.com">Richard Opalka</a>
  * @since 14-Dec-2006
  */
 public final class ServiceLoader
@@ -97,10 +91,6 @@ public final class ServiceLoader
    public static Object loadService(String propertyName, String defaultFactory, ClassLoader cl)
    {
       Object factory = loadFromServices(propertyName, cl);
-      if (factory == null)
-      {
-         factory = loadFromPropertiesFile(propertyName, cl);
-      }
       if (factory == null)
       {
          factory = loadFromSystemProperty(propertyName, defaultFactory, cl);
@@ -165,29 +155,26 @@ public final class ServiceLoader
 
    private static String getServiceNameUsingCache(ClassLoader loader, String filename) throws IOException
    {
-      Map<String, String> map = serviceMap.get(loader);
-      if (map != null && map.containsKey(filename))
-      {
-         return map.get(filename);
-      }
-      else
-      {
-         if (map == null)
-         {
-            map = new ConcurrentHashMap<String, String>();
+      Map<String, String> map;
+      synchronized (serviceMap) {
+         map = serviceMap.get(loader);
+         if (map == null) {
+            map = new ConcurrentHashMap<>();
             serviceMap.put(loader, map);
          }
-         InputStream inStream = SecurityActions.getResourceAsStream(loader, filename);
-         String factoryName = null;
-         if (inStream != null)
-         {
-            BufferedReader br = new BufferedReader(new InputStreamReader(inStream, "UTF-8"));
-            factoryName = br.readLine();
-            br.close();
-            map.put(filename, factoryName);
-         }
-         return factoryName;
       }
+      String factoryName = map.get(filename);
+      if (factoryName != null) return factoryName;
+
+      InputStream inStream = SecurityActions.getResourceAsStream(loader, filename);
+      if (inStream != null)
+      {
+         BufferedReader br = new BufferedReader(new InputStreamReader(inStream, "UTF-8"));
+         factoryName = br.readLine();
+         br.close();
+         map.put(filename, factoryName);
+      }
+      return factoryName;
    }
    
    /** Use the system property
@@ -202,8 +189,7 @@ public final class ServiceLoader
       {
          try
          {
-            Class<?> factoryClass = SecurityActions.loadClass(loader, factoryName);
-            factory = factoryClass.newInstance();
+            factory = SecurityActions.loadClass(loader, factoryName).newInstance();
          }
          catch (Throwable t)
          {
@@ -220,59 +206,18 @@ public final class ServiceLoader
       return factory;
    }
 
-   /**
-    * Use the properties file "${java.home}/lib/jaxws.properties" in the JRE directory.
-    * This configuration file is in standard java.util.Properties format and contains the 
-    * fully qualified name of the implementation class with the key being the system property defined above.
-    */
-   private static Object loadFromPropertiesFile(String propertyName, ClassLoader loader)
-   {
-      Object factory = null;
-      String factoryName = null;
-
-      // Use the properties file "lib/jaxm.properties" in the JRE directory.
-      // This configuration file is in standard java.util.Properties format and contains the fully qualified name of the implementation class with the key being the system property defined above.
-      PrivilegedAction<String> propertyReadAction = new PropertyAccessAction("java.home");
-      String javaHome = AccessController.doPrivileged(propertyReadAction);
-      File jaxmFile = new File(javaHome + "/lib/jaxws.properties");
-      if ((Boolean)AccessController.doPrivileged(new PropertyFileExistAction(jaxmFile)))
-      {
-         try
-         {
-            PropertyFileAccessAction propertyFileAccessAction = new PropertyFileAccessAction(jaxmFile.getCanonicalPath());
-            Properties jaxmProperties = AccessController.doPrivileged(propertyFileAccessAction);
-            factoryName = jaxmProperties.getProperty(propertyName);
-            if (factoryName != null)
-            {
-               Class<?> factoryClass = SecurityActions.loadClass(loader, factoryName);
-               factory = factoryClass.newInstance();
-            }
-         }
-         catch (Throwable t)
-         {
-            throw MESSAGES.failedToLoad(t, new Object[]{ propertyName ,  factoryName});
-         }
-      }
-
-      return factory;
-   }
-
    private static Object loadDefault(String defaultFactory, ClassLoader loader)
    {
-      Object factory = null;
+      Object factory;
 
       // Use the default factory implementation class.
-      if (defaultFactory != null)
+      try
       {
-         try
-         {
-            Class<?> factoryClass = SecurityActions.loadClass(loader, defaultFactory);
-            factory = factoryClass.newInstance();
-         }
-         catch (Throwable t)
-         {
-            throw MESSAGES.failedToLoad(t, defaultFactory);
-         }
+         factory = SecurityActions.loadClass(loader, defaultFactory).newInstance();
+      }
+      catch (Throwable t)
+      {
+         throw MESSAGES.failedToLoad(t, defaultFactory);
       }
 
       return factory;
@@ -280,9 +225,9 @@ public final class ServiceLoader
 
    private static class PropertyAccessAction implements PrivilegedAction<String>
    {
-      private String name;
+      private final String name;
 
-      PropertyAccessAction(String name)
+      PropertyAccessAction(final String name)
       {
          this.name = name;
       }
@@ -293,55 +238,4 @@ public final class ServiceLoader
       }
    }
 
-   private static class PropertyFileAccessAction implements PrivilegedAction<Properties>
-   {
-      private String filename;
-
-      PropertyFileAccessAction(String filename)
-      {
-         this.filename = filename;
-      }
-
-      public Properties run()
-      {
-         InputStream inStream = null;
-         try
-         {
-            inStream = new FileInputStream(filename);
-            Properties props = new Properties();
-            props.load(inStream);
-            return props;
-         }
-         catch (IOException ex)
-         {
-            throw MESSAGES.cannotLoadProperties(ex, filename);
-         }
-         finally
-         {
-            try
-            {
-               if (inStream != null)
-               {
-                  inStream.close();
-               }
-            }
-            catch (Exception ignore) {}
-         }
-      }
-   }
-   
-   private static class PropertyFileExistAction implements PrivilegedAction<Boolean>
-   {
-      private File file;
-
-      PropertyFileExistAction(File file)
-      {
-         this.file = file;
-      }
-
-      public Boolean run()
-      {
-         return file.exists();
-      }
-   }
 }
