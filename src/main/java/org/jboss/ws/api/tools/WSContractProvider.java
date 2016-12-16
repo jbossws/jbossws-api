@@ -47,10 +47,11 @@ import org.jboss.ws.api.util.ServiceLoader;
  * This class expects to be thread-confined, so it can not be shared between threads.
  *
  * @author <a href="mailto:jason.greene@jboss.com">Jason T. Greene</a>
+ * @author <a href="mailto:ropalka@redhat.com">Richard Opalka</a>
  */
 public abstract class WSContractProvider
 {
-   private static String DEFAULT_PROVIDER = "org.jboss.ws.tools.jaxws.impl.JBossWSProviderFactoryImpl";
+   private static String DEFAULT_PROVIDER = "org.jboss.wsf.stack.cxf.tools.CXFProviderFactoryImpl";
    public static final String PROVIDER_PROPERTY = "org.jboss.ws.api.tools.ProviderFactory";
 
    protected WSContractProvider()
