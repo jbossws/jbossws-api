@@ -37,10 +37,11 @@ import org.jboss.ws.api.util.ServiceLoader;
  * interface.
  * 
  * @author <a href="mailto:jason.greene@jboss.com">Jason T. Greene</a>
+ * @author <a href="mailto:ropalka@redhat.com">Richard Opalka</a>
  */
 public abstract class WSContractConsumer
 {
-   private static String DEFAULT_PROVIDER = "org.jboss.ws.tools.jaxws.impl.SunRIConsumerFactoryImpl";
+   private static String DEFAULT_PROVIDER = "org.jboss.wsf.stack.cxf.tools.CXFConsumerFactoryImpl";
    public static final String PROVIDER_PROPERTY = "org.jboss.ws.api.tools.ConsumerFactory";
 
    /**
