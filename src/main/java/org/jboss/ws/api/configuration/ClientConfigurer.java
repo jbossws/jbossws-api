@@ -21,7 +21,7 @@
  */
 package org.jboss.ws.api.configuration;
 
-import javax.xml.ws.BindingProvider;
+import jakarta.xml.ws.BindingProvider;
 
 /**
  * JBossWS Client Configuration interface

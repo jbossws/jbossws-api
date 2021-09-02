@@ -70,14 +70,14 @@ public final class ServiceLoader
    /**
     * This method uses the algorithm below using the JAXWS Provider as an example.
     * <pre>
-    * 1. If a resource with the name of META-INF/services/javax.xml.ws.spi.Provider exists, then
+    * 1. If a resource with the name of META-INF/services/jakarta.xml.ws.spi.Provider exists, then
     * its first line, if present, is used as the UTF-8 encoded name of the implementation class.
     * 
     * 2. If the ${java.home}/lib/jaxws.properties file exists and it is readable by the 
     * java.util.Properties.load(InputStream) method and it contains an entry whose key is 
-    * javax.xml.ws.spi.Provider, then the value of that entry is used as the name of the implementation class.
+    * jakarta.xml.ws.spi.Provider, then the value of that entry is used as the name of the implementation class.
     * 
-    * 3. If a system property with the name javax.xml.ws.spi.Provider is defined, then its value is used
+    * 3. If a system property with the name jakarta.xml.ws.spi.Provider is defined, then its value is used
     * as the name of the implementation class.
     * 
     * 4. Finally, a default implementation class name is used.
@@ -101,14 +101,14 @@ public final class ServiceLoader
    /**
     * This method uses the algorithm below using the JAXWS Provider as an example.
     * <pre>
-    * 1. If a resource with the name of META-INF/services/javax.xml.ws.spi.Provider exists, then
+    * 1. If a resource with the name of META-INF/services/jakarta.xml.ws.spi.Provider exists, then
     * its first line, if present, is used as the UTF-8 encoded name of the implementation class.
     * 
     * 2. If the ${java.home}/lib/jaxws.properties file exists and it is readable by the 
     * java.util.Properties.load(InputStream) method and it contains an entry whose key is 
-    * javax.xml.ws.spi.Provider, then the value of that entry is used as the name of the implementation class.
+    * jakarta.xml.ws.spi.Provider, then the value of that entry is used as the name of the implementation class.
     * 
-    * 3. If a system property with the name javax.xml.ws.spi.Provider is defined, then its value is used
+    * 3. If a system property with the name jakarta.xml.ws.spi.Provider is defined, then its value is used
     * as the name of the implementation class.
     * 
     * 4. Finally, a default implementation class name is used.
