@@ -21,8 +21,8 @@
  */
 package org.jboss.ws.api.configuration;
 
-import javax.xml.ws.BindingProvider;
-import javax.xml.ws.WebServiceFeature;
+import jakarta.xml.ws.BindingProvider;
+import jakarta.xml.ws.WebServiceFeature;
 
 /**
  * Abstract JBoss client JAXWS feature

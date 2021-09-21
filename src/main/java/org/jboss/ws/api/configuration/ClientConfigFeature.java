@@ -21,7 +21,7 @@
  */
 package org.jboss.ws.api.configuration;
 
-import javax.xml.ws.BindingProvider;
+import jakarta.xml.ws.BindingProvider;
 
 /**
  * A JBoss client JAXWS feature that setup a JBossWS predefined client config

@@ -21,8 +21,8 @@
  */
 package org.jboss.ws.api.handler;
 
-import javax.xml.ws.handler.Handler;
-import javax.xml.ws.handler.MessageContext;
+import jakarta.xml.ws.handler.Handler;
+import jakarta.xml.ws.handler.MessageContext;
 
 import org.jboss.ws.api.Messages;
 

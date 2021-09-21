@@ -26,7 +26,7 @@ import java.security.PrivilegedAction;
 import java.util.Iterator;
 import org.jboss.ws.api.util.ServiceLoader;
 
-import javax.xml.ws.BindingProvider;
+import jakarta.xml.ws.BindingProvider;
 
 /**
  * A facility for setting a JBossWS Client Configuration
