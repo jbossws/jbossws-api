@@ -29,6 +29,7 @@
     <jboss-logging.version>3.5.1.Final</jboss-logging.version>
     <jboss-logging-processor.version>2.2.1.Final</jboss-logging-processor.version>
     <jboss-jakarta-xml-ws-api>1.0.1.Final</jboss-jakarta-xml-ws-api>
+    <version.maven-javadoc-plugin>3.3.2</version.maven-javadoc-plugin>
   </properties>
 
   <!-- licenses -->
@@ -67,6 +68,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-javadoc-plugin</artifactId>
+            <version>${version.maven-javadoc-plugin}</version>
             <executions>
               <execution>
                 <phase>package</phase>
