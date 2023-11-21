@@ -26,7 +26,7 @@
 
   <properties>
     <maven.javadoc.skip>false</maven.javadoc.skip>
-    <jboss-logging.version>3.5.1.Final</jboss-logging.version>
+    <jboss-logging.version>3.5.3.Final</jboss-logging.version>
     <jboss-logging-processor.version>2.2.1.Final</jboss-logging-processor.version>
     <jboss-jakarta-xml-ws-api>1.0.1.Final</jboss-jakarta-xml-ws-api>
     <version.maven-javadoc-plugin>3.3.2</version.maven-javadoc-plugin>
