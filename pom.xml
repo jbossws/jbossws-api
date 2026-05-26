@@ -6,7 +6,7 @@
 
   <name>JBoss Web Services - API</name>
   <description>JBoss Web Services - JBossWS API Jakarta Version</description>
-  <url>https://github.com/jbossws/jbossws-common</url>
+  <url>https://github.com/jbossws/jbossws-api</url>
 
   <version>3.1.1-SNAPSHOT</version>
 
